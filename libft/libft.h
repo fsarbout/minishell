@@ -3,18 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fsarbout <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 09:00:09 by fsarbout          #+#    #+#             */
-/*   Updated: 2019/10/31 16:49:29 by fsarbout         ###   ########.fr       */
+/*   Updated: 2021/01/17 08:00:22 by fsarbout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# include <string.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <fcntl.h>
+# include <stdlib.h>
+# include <sys/types.h>
+# include <sys/uio.h>
+# include <stddef.h>
 
 int			ft_isalpha(int c);
 int			ft_isascii(int c);
@@ -27,10 +33,9 @@ int			ft_memcmp(const void *s1, const void *s2, size_t n);
 void		*ft_memcpy(void *dst, void *src, size_t n);
 void		*ft_memmove(void *dst, const void *src, size_t len);
 void		*ft_memset(void *b, int c, size_t len);
-void		ft_putchar_fd(char c, int fd);
+void		ft_putchar(char c);
 void		ft_putendl_fd(char *s, int fd);
-void		ft_putnbr_fd(int n, int fd);
-void		ft_putstr_fd(char *s, int fd);
+void		ft_putstr(char *s);
 char		*ft_strchr(const char *s, int c);
 char		*ft_strdup(const char *s1);
 char		*ft_strjoin(char const *s1, char const *s2);
@@ -50,5 +55,20 @@ void		*ft_calloc(size_t count, size_t size);
 int			ft_isalnum(int c);
 char		*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char		**ft_split(char const *s, char c);
+int			ft_strcmp(const char *s1, const char *s2);
+size_t		ft_strlcpy1(char *dst, const char *src, size_t size);
 
+# ifndef GET_NEXT_LINE_H
+#  define GET_NEXT_LINE_H
+
+#  define BUFFER_SIZE 37
+
+int			get_next_line(int fd, char **line);
+char		*ft_strdup(const char *s1);
+int			lenline(char *s1);
+int			abc(int fd, char **s2, int rd);
+int			search(char *str);
+int			fr(char **s);
+
+# endif
 #endif
