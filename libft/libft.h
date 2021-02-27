@@ -6,7 +6,7 @@
 /*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 09:00:09 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/01/17 08:00:22 by fsarbout         ###   ########.fr       */
+/*   Updated: 2021/02/26 12:18:27 by fsarbout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ size_t		ft_strlcpy1(char *dst, const char *src, size_t size);
 # ifndef GET_NEXT_LINE_H
 #  define GET_NEXT_LINE_H
 
-#  define BUFFER_SIZE 37
+#  define BUFFER_SZ 37
 
-int			get_next_line(int fd, char **line);
+// int			get_next_line(int fd, char **line);
 char		*ft_strdup(const char *s1);
 int			lenline(char *s1);
 int			abc(int fd, char **s2, int rd);

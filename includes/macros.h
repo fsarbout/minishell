@@ -6,12 +6,14 @@
 /*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 17:11:33 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/02/25 20:07:41 by fsarbout         ###   ########.fr       */
+/*   Updated: 2021/02/26 10:38:06 by fsarbout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MACROS_H
 # define MACROS_H
  
+#define TRUE 1
+#define FALSE 0
 
 #endif

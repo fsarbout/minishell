@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   functions.h                                        :+:      :+:    :+:   */
+/*   outc.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ielbadao <ielbadao@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/25 17:11:24 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/02/26 18:51:43 by fsarbout         ###   ########.fr       */
+/*   Created: 2020/12/13 13:03:38 by ielbadao          #+#    #+#             */
+/*   Updated: 2020/12/13 13:35:24 by ielbadao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FUNCTIONS_H
-#define FUNCTIONS_H
+#include "../out.h"
 
-
-int             lenght(char **str);
-
-#endif
+void			outc(char c)
+{
+	write(1, &c, 1);
+}

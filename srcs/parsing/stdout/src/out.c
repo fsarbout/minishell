@@ -1,19 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   functions.h                                        :+:      :+:    :+:   */
+/*   out.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/25 17:11:24 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/02/26 18:51:43 by fsarbout         ###   ########.fr       */
+/*   Created: 2020/12/09 11:27:40 by ielbadao          #+#    #+#             */
+/*   Updated: 2021/02/26 15:25:18 by fsarbout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FUNCTIONS_H
-#define FUNCTIONS_H
+#include "../out.h"
 
-
-int             lenght(char **str);
-
-#endif
+void		out(t_string str)
+{
+	while (*str)
+	{
+		write(1, str, 1);
+		str++;
+	}
+}

@@ -6,7 +6,7 @@
 /*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 09:11:26 by fsarbout          #+#    #+#             */
-/*   Updated: 2020/11/05 18:32:02 by fsarbout         ###   ########.fr       */
+/*   Updated: 2021/02/26 12:19:01 by fsarbout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ int		abc(int fd, char **s2, int rd)
 	char	*buff;
 	char	*ptr;
 
-	if ((buff = (char*)malloc(sizeof(char) * (BUFFER_SIZE + 1))) == NULL)
+	if ((buff = (char*)malloc(sizeof(char) * (BUFFER_SZ + 1))) == NULL)
 		return (-1);
 	if (!search(*s2))
 	{
 		while (rd > 0)
 		{
-			rd = read(fd, buff, BUFFER_SIZE);
+			rd = read(fd, buff, BUFFER_SZ);
 			buff[rd] = '\0';
 			ptr = *s2;
 			if ((*s2 = ft_strjoin(*s2, buff)) == NULL)
@@ -82,7 +82,7 @@ int		get_next_line(int fd, char **line)
 	char		*ptr;
 	static char	*s1;
 
-	if (fd < 0 || line == NULL || BUFFER_SIZE <= 0 || read(fd, NULL, 0) != 0)
+	if (fd < 0 || line == NULL || BUFFER_SZ <= 0 || read(fd, NULL, 0) != 0)
 		return (-1);
 	if (!s1)
 		if ((s1 = ft_strdup("")) == NULL)
