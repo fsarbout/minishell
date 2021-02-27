@@ -6,7 +6,7 @@
 /*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 17:11:29 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/02/26 19:01:18 by fsarbout         ###   ########.fr       */
+/*   Updated: 2021/02/27 08:29:24 by hnaji-el         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 int main(/* int ac, char ** av, char **env */)
 {
-    int elements;
-    char *line;
-    char **cmd_line;
+    int		elements;
+    char 	*line;
+    char 	**cmd_line;
+
     int i = 0;
     out("minishell$ ");
 	in(0, &line);
