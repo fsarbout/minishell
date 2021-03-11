@@ -1,49 +1,91 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/25 17:11:29 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/02/27 08:29:24 by hnaji-el         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#include "minishell.h"
+#include <time.h>
+#include <signal.h>
 
-#include "includes/minishell.h"
-
-int main(/* int ac, char ** av, char **env */)
+void prints(void *str)
 {
-    int		elements;
-    char 	*line;
-    char 	**cmd_line;
-
-    int i = 0;
-    out("minishell$ ");
-	in(0, &line);
-    // cmd_line = line
-    // if (!ft_strncmp(line, "ls -ls", ft_strlen("ls -la")))
-    //     printf("nnbeg\n");
-    printf("line == %s\n" , line);
-    cmd_line = ft_split(line ,32);
-    // ft_putstr("minishell$ ");
-    elements = lenght(cmd_line);
-    while (elements)
-    {
-        printf("%s\n", cmd_line[i]);
-        elements--;
-        i++;
-    }
-    // printf("%s\n", line);
-    return (0);
+    printf("%s|\n", ((t_redx*)str)->file);
 }
 
-int             lenght(char **str)
+void printss(void *str)
 {
-        int     n;
+    printf("%s\n", (char*)str);
+}
+void print_array(char **tab)
+{
+    while (*tab)
+    {
+        printf("%s\n", *tab);
+        tab++;
+    }
+    
+}
+void print_command(t_command commands ,t_hash_map *env)
+{
 
-        n = 0;
-        while (str[n])
-                n++;
-        return (n);
+          ft_lstiter(commands.args, &printss);
+          printf("in file: ");
+          ft_lstiter(commands.in_redx, &prints);
+          printf("\nout file: ");
+          ft_lstiter(commands.out_redx, &prints);
+        printf("---------------------------------------\n");
+}
+
+void print_shell(void)
+{
+    ft_putstr_fd(BGRN, STDOUT_FILENO);
+    ft_putstr_fd("my_shell>", STDOUT_FILENO);
+    ft_putstr_fd(RESET, STDOUT_FILENO);
+}
+
+void sighandler(int signum) {
+    ft_putstr_fd("\n\r\r", STDOUT_FILENO);
+    print_shell();
+}
+
+void fun(void *str)
+{
+    char *temp;
+
+    temp = (char*)str;
+    if (temp)
+        free(temp);
+}
+void get_external_env(char **envs, t_hash_map *env)
+{
+    char **temp;
+
+    while (*envs)
+    {
+        temp = ft_split(*envs, '=');
+        set_value(temp[0], temp[1], env);
+        free_array((void**)temp);
+        envs++;
+    }
+}
+int main (int argc, char *argv[], char **envs)
+{
+    char *line;
+    t_hash_map *env;
+    int j;
+    t_list *errors;
+    int i = 1;
+    char **temp;
+    
+
+    env = init_hash_map(100);
+    get_external_env(envs, env);
+    int fd = open("test.txt", O_RDONLY);
+    while (i > 0)
+    {
+        print_shell();
+        signal(SIGINT, sighandler);
+        i = get_next_line(STDIN_FILENO, &line);
+        if (line[0])
+            process_line(line, env);
+        free(line);
+    }
+    free_hash_map(env);
+
+    return 0;
 }

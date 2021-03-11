@@ -3,38 +3,39 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+         #
+#    By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/02/25 20:02:45 by fsarbout          #+#    #+#              #
-#    Updated: 2021/02/26 19:03:04 by fsarbout         ###   ########.fr        #
+#    Created: 2019/10/22 16:29:25 by htagrour          #+#    #+#              #
+#    Updated: 2021/03/08 18:05:00 by htagrour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = minishell
+NAME=minishell.a
 
-CC = gcc 
+SRC = get_line/*.c\
+		library/*.c\
+		parsing/*.c\
+		utils/*.c\
+		execution/*.c\
+		hash_table/*.c\
+		main.c
 
-CFLAGS = -Wall -Wextra -Werror 
-#SANITIZER = -fsanitize=address
+OBJECT = *.o
 
- 
-SRC = *.c\
-	 ./srcs/parsing/stdin/src/*.c\
-	 ./srcs/parsing/stdout/src/*.c\
-	 ./libft/*.c
+all: $(NAME)
 
-	 
+$(NAME):
 
-all : $(NAME)
+	gcc -c $(SRC)  -D BUFFER_SIZE=10 -g
+	#-Wall -Wextra -Werror
+	ar rc $(NAME) $(OBJECT)
+	ranlib $(NAME)
+	gcc  $(NAME) -fsanitize=address -o minishell -g
+	rm -f $(OBJECT) 
 
-$(NAME): $(SRC)
-	@cd libft && make re
-	@$(CC) $(SRC) $(CFLAGS) -o $(NAME) $(SANITIZER)
-	
 clean:
-	@cd libft && make fclean
-
+	rm -f $(OBJECT) 
 fclean: clean
-	@rm -rf $(NAME) 
-
-re:	fclean all
+	rm -f $(NAME)
+	rm -f minishell
+re: fclean all
