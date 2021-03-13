@@ -6,7 +6,7 @@
 /*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 16:27:45 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/13 16:56:45 by fsarbout         ###   ########.fr       */
+/*   Updated: 2021/03/13 22:23:25 by fsarbout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ int cd(t_command command, t_hash_map *env)
     {
         temp =(char*) command.args->next->content;
         if (temp[0]== '~')
-            path = ft_strjoin("/Users/htagrour", temp + 1);
+            path = ft_strjoin("/home/fsarbout", temp + 1);
         else
             path = ft_strdup(temp);
     }
     else
-        path = ft_strdup("/Users/htagrour");
+        path = ft_strdup("/home/fsarbout");
     if (chdir(path) != 0)
         return (print_error("PATH not exist or a file", 1, env));
     set_value("PWD", path, env);
