@@ -1,11 +1,23 @@
-#include "../minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/13 16:28:42 by fsarbout          #+#    #+#             */
+/*   Updated: 2021/03/13 16:28:46 by fsarbout         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "../../includes/minishell.h"
 
 void adjust_var_bag(t_var_bag *bag, char c)
 {       
         bag->slash_flag += (c == 92) ? 1:0;
         bag->slash_flag %= 2;
-        bag->slash_flag *= (bag->spec_char == '\'' && bag->brack_flag) ? 0 : 1;
+		if  (bag->spec_char == '\'' && bag->brack_flag)
+			bag->slash_flag = 0;
         if ((c == bag->spec_char || !bag->brack_flag) && !bag->slash_flag)
         {   if (c == '\'' || c == '"')
             {
@@ -13,7 +25,8 @@ void adjust_var_bag(t_var_bag *bag, char c)
                 bag->brack_flag = (bag->brack_flag + 1) % 2;
             }
         }
-        bag->slash_flag *= (c != 92) ? 0 : 1;
+		if (c != 92)
+			bag->slash_flag = 0;
 }
 
 int belong(char *str, char c)
@@ -34,13 +47,13 @@ int is_red(char c)
 
 int conditions(char c, t_var_bag bag, char n)
 {
-	
 
 	if (bag.brack_flag && bag.spec_char == '\'' && c != '\'')
 		return 0;
 	if (c == '"' && !bag.slash_flag)
 		return 1;
-	if (c == '\'' && (!bag.slash_flag && !(bag.brack_flag && bag.spec_char == '"')))
+	if (c == '\'' && 
+		(!bag.slash_flag && !(bag.brack_flag && bag.spec_char == '"')))
 		return 1;
 	if (c == '\\')
 	{

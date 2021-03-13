@@ -5,8 +5,8 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include "../library/libft.h"
-typedef struct  s_listo
+#include "../libft/libft.h"
+typedef struct s_listo
 {
     char *key;
     char *value;
@@ -18,15 +18,14 @@ typedef struct s_hash_map
     int size;
     int elem_total;
     t_listo **item;
-}t_hash_map;
+} t_hash_map;
 
-
-unsigned int  hash(const char *str, int size);
+unsigned int hash(const char *str, int size);
 t_hash_map *init_hash_map(int size);
 char *get_value(const char *key, t_hash_map *hm);
-int set_value(const char *key, const char *value, t_hash_map *hm);
+void set_value(const char *key, const char *value, t_hash_map *hm);
 int free_hash_map(t_hash_map *hm);
-int delet_value(const char *key, t_hash_map *hm);
+void delet_value(const char *key, t_hash_map *hm);
 char **hash_to_arr(t_hash_map *hm);
 
 #endif

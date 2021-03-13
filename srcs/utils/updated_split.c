@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   updated_split.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 00:30:20 by htagrour          #+#    #+#             */
-/*   Updated: 2021/03/08 18:34:31 by htagrour         ###   ########.fr       */
+/*   Updated: 2021/03/13 16:31:16 by fsarbout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../includes/minishell.h"
 
 static int		get_word_number(char const *str, char del, int *wn)
 {

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: htagrour <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/22 16:29:25 by htagrour          #+#    #+#              #
-#    Updated: 2019/10/22 16:39:22 by htagrour         ###   ########.fr        #
+#    Updated: 2021/03/13 17:04:41 by fsarbout         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -108,16 +108,16 @@ INCLUDES=./
 all: $(NAME)
 
 $(NAME): $(OBJECT)
-	gcc -Wall -Wextra -Werror -I$(INCLUDES) -c $(SRC)
-	ar rc $(NAME) $(OBJECT)
-	ranlib $(NAME)
+	@gcc -Wall -Wextra -Werror -I$(INCLUDES) -c $(SRC)
+	@ar rc $(NAME) $(OBJECT)
+	@ranlib $(NAME)
 
 clean:
-	rm -f $(OBJECT) $(BOBJET)
+	@rm -f $(OBJECT) $(BOBJET)
 bonus:
-	gcc -Wall -Wextra -Werror -I$(INCLUDES) -c $(BSRC)
-	ar rc $(NAME) $(BOBJET)
-	ranlib $(NAME)
+	@gcc -Wall -Wextra -Werror -I$(INCLUDES) -c $(BSRC)
+	@ar rc $(NAME) $(BOBJET)
+	@ranlib $(NAME)
 fclean: clean
 	rm -f $(NAME)
 

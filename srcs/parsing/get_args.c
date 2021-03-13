@@ -1,4 +1,16 @@
-#include "../minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_args.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/13 16:28:32 by fsarbout          #+#    #+#             */
+/*   Updated: 2021/03/13 16:58:56 by fsarbout         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../includes/minishell.h"
 
 void			get_argument(char **str, char **ptr,
 						t_var_bag *bag, t_hash_map *env)
@@ -32,9 +44,7 @@ void			get_argument(char **str, char **ptr,
 int				extract_arg(t_command *command, char **str,
 						t_var_bag *bag, t_hash_map *env)
 {
-	int			len;
 	char		*arg;
-	char		*temp;
 
 	arg = ft_strdup("");
 	while (**str &&
@@ -65,6 +75,7 @@ t_redx			*get_file(char **str, t_var_bag *bag, t_hash_map *env)
 		get_argument(str, &red->file, bag, env);
 	if (!red->file[0])
 	{
+		free(red->file);
 		free(red);
 		return (NULL);
 	}
@@ -101,7 +112,6 @@ int				extract_file(t_command *command, char **str,
 int				get_cmd(t_command *command, char *str, t_hash_map *env)
 {
 	t_var_bag	bag;
-	int			i;
 
 	ft_bzero(&bag, sizeof(bag));
 	ft_bzero(command, sizeof(t_command));

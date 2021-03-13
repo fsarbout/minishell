@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../../includes/minishell.h"
 
 
 char **list_to_array(t_list *list)

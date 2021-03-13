@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/11 17:56:39 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/11 17:56:42 by fsarbout         ###   ########.fr       */
+/*   Created: 2021/03/13 16:27:45 by fsarbout          #+#    #+#             */
+/*   Updated: 2021/03/13 16:56:45 by fsarbout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../includes/minishell.h"
 
 int is_valide_var(char *str)
 {   
@@ -73,7 +73,7 @@ int     export(t_command command, t_hash_map *env)
 {
     char **str;
     t_list *temp;
-    char **envs;
+    // char **envs;
 
     temp = command.args->next;
     // if (!temp)
@@ -114,19 +114,43 @@ int unset(t_command command, t_hash_map *env)
     return (0);
 }
 
+// int echo(char **args)
+// {
+//     int flag;
+
+//     flag = 0;
+//     args++;
+//     if (*args)
+//     {
+//         if (!strcmp(*args, "-n"))
+//         {
+//             args++;
+//             flag = 1;
+//         }
+//         while (*args)
+//         {
+//             ft_putstr_fd(*args, STDOUT_FILENO);
+//             if (*(args + 1))
+//                 ft_putstr_fd(" ", STDOUT_FILENO);
+//             args++;
+//         }
+//     }
+//     if (!flag)
+//         ft_putstr_fd("\n", STDOUT_FILENO);
+//     return (0);
+// }
+
 int echo(char **args)
 {
     int flag;
-
+   
     flag = 0;
     args++;
     if (*args)
     {
-        if (!strcmp(*args, "-n"))
-        {
-            args++;
-            flag = 1;
-        }
+        echo_check_n(args, &flag);      
+        if (flag)
+            args += flag;
         while (*args)
         {
             ft_putstr_fd(*args, STDOUT_FILENO);
@@ -193,7 +217,7 @@ int built_in1(t_command command, t_hash_map *env)
 int built_in2(char **args, t_hash_map *envs)
 {
     int res;
-    char *cmd;
+    
     res = 1;
     if (!strcmp(*args,"echo"))
         res = echo(args);
