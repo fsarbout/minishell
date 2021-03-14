@@ -7,12 +7,10 @@
 #include <stdio.h>
 #include <fcntl.h>
 #include <string.h>
-#include <wait.h>
 #include <dirent.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <errno.h>
-#include <wait.h>
 #include <signal.h>
 #include "macros.h"
 #include "structs.h"

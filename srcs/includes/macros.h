@@ -1,29 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   macros.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/31 22:24:08 by htagrour          #+#    #+#             */
-/*   Updated: 2021/03/13 16:45:48 by fsarbout         ###   ########.fr       */
+/*   Created: 2021/03/13 16:15:03 by fsarbout          #+#    #+#             */
+/*   Updated: 2021/03/13 16:15:32 by fsarbout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef MACROS_H
+#define MACROS_H
 
-# include <sys/types.h>
-# include <sys/uio.h>
-# include <unistd.h>
-# include <stdlib.h>
-
-#define BUFFER_SIZE 1
-
-size_t				ft_strlen(const char *s);
-char				*ft_strjoin(char const *s1, char const *s2);
-char				*ft_strdup(const char *str);
-char				*ft_substr(char const *s, unsigned int start, size_t len);
-int					get_next_line(int fd, char **line);
+#define RED "\e[0;31m"
+#define RESET "\e[0m"
+#define BLKHB "\e[0;100m"
+#define BGRN "\e[1;32m"
+#define CLEAR "\e[1;1H\e[2J"
 
 #endif
