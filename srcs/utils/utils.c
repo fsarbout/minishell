@@ -21,7 +21,7 @@ int    print_error(char *str, int error, t_hash_map *env)
 {
     char *temp;
     temp = ft_itoa(error);
-    ft_putendl_fd(str, STDOUT_FILENO);
+    ft_putendl_fd(str, STDOUT_FILENO, 1);
     set_value("?", temp, env);
     free(temp);
     errno = error;
