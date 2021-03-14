@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: htagrour <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 13:09:03 by htagrour          #+#    #+#             */
-/*   Updated: 2019/10/20 23:24:42 by htagrour         ###   ########.fr       */
+/*   Updated: 2021/03/14 18:26:49 by fsarbout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char			*ft_itoa(int n);
 void			ft_putchar_fd(char c, int fd);
 void			ft_putstr_fd(char *s, int fd);
 char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
-void			ft_putendl_fd(char *s, int fd);
+void			ft_putendl_fd(char *s, int fd, int newlinw);
 void			ft_putnbr_fd(int nb, int fd);
 char			*ft_strtrim(char const *s1, char const *set);
 char 			*ft_add_char(const char *str, char c);

@@ -6,7 +6,7 @@
 /*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 16:27:45 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/13 16:56:45 by fsarbout         ###   ########.fr       */
+/*   Updated: 2021/03/14 18:26:31 by fsarbout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ int cd(t_command command, t_hash_map *env)
     {
         temp =(char*) command.args->next->content;
         if (temp[0]== '~')
-            path = ft_strjoin("/Users/htagrour", temp + 1);
+            path = ft_strjoin("/home/fsarbout", temp + 1);
         else
             path = ft_strdup(temp);
     }
     else
-        path = ft_strdup("/Users/htagrour");
+        path = ft_strdup("/home/fsarbout");
     if (chdir(path) != 0)
         return (print_error("PATH not exist or a file", 1, env));
     set_value("PWD", path, env);
@@ -64,7 +64,7 @@ int pwd()
     char *buff;
 
     buff = malloc(sizeof(char)*1024);
-    ft_putendl_fd(getcwd(buff, 1024), STDOUT_FILENO);
+    ft_putendl_fd(getcwd(buff, 1024), STDOUT_FILENO, 1);
     free(buff); 
     return (0);
 }
@@ -73,18 +73,23 @@ int     export(t_command command, t_hash_map *env)
 {
     char **str;
     t_list *temp;
-    // char **envs;
-
+    char **envs;
+    int i = 0;
+    int j;
     temp = command.args->next;
-    // if (!temp)
-    // {
-    //     envs = hash_to_arr(env);
-    //     while (*envs)
-    //     {
-    //         /
-    //     }
-        
-    // }
+    if (!temp)
+    {
+        envs = hash_to_arr(env);
+        j = array_lenght(envs);
+        while (*envs[i] && (i < j - 1))
+        {
+            ft_putendl_fd("declare -x ", STDOUT_FILENO, 0);
+            ft_putendl_fd(envs[i], STDOUT_FILENO, 1);
+            i++;
+        }
+        free_array((void**)envs);
+        return (0);
+    }
     while (temp)
     {
         str = ft_split((char *)temp->content, '=');
@@ -113,32 +118,6 @@ int unset(t_command command, t_hash_map *env)
     }
     return (0);
 }
-
-// int echo(char **args)
-// {
-//     int flag;
-
-//     flag = 0;
-//     args++;
-//     if (*args)
-//     {
-//         if (!strcmp(*args, "-n"))
-//         {
-//             args++;
-//             flag = 1;
-//         }
-//         while (*args)
-//         {
-//             ft_putstr_fd(*args, STDOUT_FILENO);
-//             if (*(args + 1))
-//                 ft_putstr_fd(" ", STDOUT_FILENO);
-//             args++;
-//         }
-//     }
-//     if (!flag)
-//         ft_putstr_fd("\n", STDOUT_FILENO);
-//     return (0);
-// }
 
 int echo(char **args)
 {
@@ -175,7 +154,7 @@ int env(char **args, t_hash_map *env)
         envs = hash_to_arr(env);
 	i = -1;
         while(envs[++i])
-            ft_putendl_fd(envs[i], STDOUT_FILENO);
+            ft_putendl_fd(envs[i], STDOUT_FILENO, 1);
         free_array((void**)envs);
         return (0);
     }
