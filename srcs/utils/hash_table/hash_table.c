@@ -8,8 +8,8 @@ t_listo *new_item(const char *key, const char *value)
 
     if (!(item = malloc(sizeof(t_listo))))
         return (NULL);
-    item->key = strdup(key);
-    item->value = strdup(value);
+    item->key = ft_strdup(key);
+    item->value = ft_strdup(value);
     item->next = NULL;
 
     return (item);
@@ -46,7 +46,7 @@ void set_value(const char *key, const char *value, t_hash_map *hm)
         else
             {
                 free(temp->value);
-                temp->value = strdup(value);
+                temp->value = ft_strdup(value);
             }
     }
     else
@@ -65,9 +65,9 @@ char *get_value(const char *key, t_hash_map *hm)
         temp = temp->next;
     }
     if (!temp)
-        value = strdup("");
+        value = ft_strdup("");
     else
-        value = strdup(temp->value);
+        value = ft_strdup(temp->value);
     return (value);
 }
 

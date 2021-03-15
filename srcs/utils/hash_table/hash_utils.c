@@ -19,7 +19,10 @@ char **hash_to_arr(t_hash_map *hm)
         while (temp)
         {   
             temp1 = ft_strjoin(temp->key, "=");
-            tab[i++] = ft_strjoin(temp1, temp->value);
+            if (temp->value)
+                tab[i++] = ft_strjoin(temp1, temp->value);
+            else
+                tab[i++] = ft_strjoin(temp1, "");
             free(temp1);
             temp = temp->next;
         } 
