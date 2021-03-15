@@ -30,9 +30,9 @@ void print_command(t_command commands ,t_hash_map *env)
         printf("---------------------------------------\n");
 }
 
-void print_shell(int flag)
+void print_shell()
 {
-    if (flag)
+    if (g_flag)
         ft_putstr_fd("\33[2K\r", STDOUT_FILENO);
     ft_putstr_fd(BGRN, STDOUT_FILENO);
     ft_putstr_fd("my_shell😎>", STDOUT_FILENO);
@@ -42,13 +42,11 @@ void print_shell(int flag)
 void  sig_handler(int sig)
 {
     ft_putstr_fd("\b\b  \b\b", STDOUT_FILENO);
-    // print_shell();
     if (sig == SIGINT)
     {
         ft_putstr_fd("\n",STDOUT_FILENO);
-        print_shell(1);
+        print_shell();
     }
-    // signal(sig, SIG_IGN);
 }
 
 void ignore_signals()
@@ -56,15 +54,6 @@ void ignore_signals()
         signal(SIGINT, sig_handler);
         signal(SIGQUIT, sig_handler);
 }
-
-// void fun(void *str)
-// {
-//     char *temp;
-
-//     temp = (char*)str;
-//     if (temp)
-//         free(temp);
-// }
 
 void get_external_env(char **envs, t_hash_map *env)
 {
@@ -79,6 +68,12 @@ void get_external_env(char **envs, t_hash_map *env)
     }
 }
 
+int free_error(char **str, t_hash_map *env)
+{
+    free_array((void**)str);
+    print_error("syntax error", 258, env);
+    return (1);
+}
 int process_line(char *line, t_hash_map *env)
 {
     t_command *commands;
@@ -86,16 +81,15 @@ int process_line(char *line, t_hash_map *env)
     char **temp2;
     int i;
     int total;
-    //you should free char array
     temp1 = updated_split(line, ';', &i);
     if (!temp1)
-        return (print_error("syntax error", 258, env));
+        return (free_error(temp1, env));
     i = -1;
     while (temp1[++i])
     {
         temp2 = updated_split(temp1[i], '|', &total);
         if (!temp2)
-            return (print_error("syntax error", 258, env));
+                return (free_error(temp1, env));
         if (!(commands = get_commands(temp2, total, env)))
             return (free_array((void**)temp1));
         execute_commands(commands, 0, total, env);
@@ -119,10 +113,8 @@ int main (int argc, char *argv[], char **envs)
     ignore_signals();
     while (i > 0)
     {
-        print_shell(0);
-	//system("/bin/stty raw");
+        print_shell();
         i = get_next_line(STDIN_FILENO, &line);
-	//system("/bin/stty cooked");
         if (line[0])
             process_line(line, env);
         free(line);

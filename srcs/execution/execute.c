@@ -6,7 +6,7 @@
 /*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 16:27:58 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/13 19:16:02 by htagrour         ###   ########.fr       */
+/*   Updated: 2021/03/15 16:56:30 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,8 @@ int start_process(t_command command, int last_fd, int fds[], t_hash_map *env)
     if((pid = fork()) == -1)
         exit(1);
     if (!pid)
-    {   sig_default_mode();
+    {
+        sig_default_mode();
         if (get_in_fd(command, &last_fd)|| get_out_fd(command, &fds[1]))
             exit(print_error("FIle ERROR", 1,env));
         if (get_full_path(&command, env))
@@ -167,6 +168,7 @@ int start_process(t_command command, int last_fd, int fds[], t_hash_map *env)
             exit(EXIT_SUCCESS);
         exit(EXIT_FAILURE);
     }
+    g_flag = 1;
     close(fds[1]);
     return (pid);
 }

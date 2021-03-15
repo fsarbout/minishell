@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
+/*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 16:16:06 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/13 16:25:26 by fsarbout         ###   ########.fr       */
+/*   Updated: 2021/03/15 17:00:54 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,6 @@ typedef struct s_command
     t_list *in_redx; //type = 0;
     t_list *out_redx; // type = 1;
 } t_command;
-t_list *error;
 
+int g_flag;
 #endif

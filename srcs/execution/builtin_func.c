@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_func.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
+/*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 16:27:45 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/14 18:26:31 by fsarbout         ###   ########.fr       */
+/*   Updated: 2021/03/15 18:12:17 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,11 @@ int is_valide_var(char *str)
 
 int is_valide_exit(char *str)
 {
+    if (*str== '+' || *str == '-')
+        str++;
     while (*str)
     {
-        if (!(ft_isdigit(*str) || *str== '+' || *str == '-'))
+        if (!ft_isdigit(*str))
             return (0);
         str++;
     }
@@ -41,31 +43,35 @@ int cd(t_command command, t_hash_map *env)
 {
     char *temp;
     char *path;
-
+    char *old_path;
+    
+    old_path = getcwd(NULL, 1024);
     if (command.args->next)
     {
         temp =(char*) command.args->next->content;
         if (temp[0]== '~')
-            path = ft_strjoin("/home/fsarbout", temp + 1);
+            path = ft_strjoin("/home/htagrour", temp + 1);
         else
             path = ft_strdup(temp);
     }
     else
-        path = ft_strdup("/home/fsarbout");
+        path = ft_strdup("/home/htagrour");
     if (chdir(path) != 0)
         return (print_error("PATH not exist or a file", 1, env));
+    set_value("OLDPWD", old_path, env);
     set_value("PWD", path, env);
     free(path);
+    free(old_path);
     return (0);
 }
 
 int pwd()
 {
-    char *buff;
-
-    buff = malloc(sizeof(char)*1024);
-    ft_putendl_fd(getcwd(buff, 1024), STDOUT_FILENO, 1);
-    free(buff); 
+    char *current_path;
+    
+    current_path = getcwd(NULL, 1024);
+    ft_putendl_fd(current_path, STDOUT_FILENO, 1);
+    free(current_path);
     return (0);
 }
 
@@ -152,7 +158,7 @@ int env(char **args, t_hash_map *env)
     if (!*args)
     {
         envs = hash_to_arr(env);
-	i = -1;
+	    i = -1;
         while(envs[++i])
             ft_putendl_fd(envs[i], STDOUT_FILENO, 1);
         free_array((void**)envs);
@@ -164,14 +170,15 @@ int env(char **args, t_hash_map *env)
 int exit_(t_command cmd, t_hash_map *env)
 {
     t_list *temp;
-
+    int exit_number;
+    
     temp = cmd.args->next;
     if (!temp)
-        exit(0);
+        exit(ft_atoi(get_value("?", env)));
     if (temp->next)
         return (print_error("exit: too many arguments", 1, env));
     if (!is_valide_exit((char*)temp->content))
-        return (print_error("exit: numeric argument required", 255, env));
+        exit(print_error("exit: numeric argument required", 255, env));
     exit(ft_atoi((char*)temp->content));
     return (0);
 }
