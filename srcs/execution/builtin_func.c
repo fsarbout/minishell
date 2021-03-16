@@ -6,7 +6,7 @@
 /*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 16:27:45 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/15 19:19:06 by htagrour         ###   ########.fr       */
+/*   Updated: 2021/03/16 09:06:48 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,13 +160,15 @@ int env(char **args, t_hash_map *env)
         envs = hash_to_arr(env);
 	    i = -1;
         while(envs[++i])
-            ft_putendl_fd(envs[i], STDOUT_FILENO, 1);
+            if (*envs[i])
+                ft_putendl_fd(envs[i], STDOUT_FILENO, 1);
         free_array((void**)envs);
         return (0);
     }
     else
         return(print_error("env don't accept args", 1, env));
 }
+
 int exit_(t_command cmd, t_hash_map *env)
 {
     t_list *temp;
