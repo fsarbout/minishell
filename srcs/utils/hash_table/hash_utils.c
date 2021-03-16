@@ -4,15 +4,13 @@ void xxx(char *key, char *value, char **dist)
 {
     char *temp;
 
-    if (strcmp(key, "?"))
-        {
+   
             if (value)
             {
                 temp = ft_strjoin(key, "=");
                 *dist = ft_strjoin(temp, value);
                 free(temp);
             }
-        }
 }
 /*
     if flag == 1 this function will retun array of key
@@ -36,11 +34,14 @@ char **hash_to_arr(t_hash_map *hm, int flag)
         temp = hm->item[size];
         while (temp)
         {
+             if (strcmp(temp->key, "?"))
+             {
             if (flag)
                 tab[i] = temp->key;
             else
                 xxx(temp->key, temp->value, &tab[i]);
-            i++;
+                i++;
+             }
             temp = temp->next;
         } 
     }
