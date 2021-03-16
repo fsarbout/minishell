@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_func.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 16:27:45 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/15 19:19:06 by htagrour         ###   ########.fr       */
+/*   Updated: 2021/03/16 07:15:44 by fsarbout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,14 @@ int     export(t_command command, t_hash_map *env)
     t_list *temp;
     char **envs;
     int i = 0;
+    int j;
     
     temp = command.args->next;
     if (!temp)
     {
         envs = hash_to_arr(env);
-        while (*envs[i])
+        j = array_lenght(envs);
+        while (*envs[i] && (i < j - 1))
         {
             ft_putendl_fd("declare -x ", STDOUT_FILENO, 0);
             ft_putendl_fd(envs[i], STDOUT_FILENO, 1);
