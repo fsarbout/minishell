@@ -38,7 +38,39 @@ int free_array(void **array)
     free(array);
     return (-1);
 }
-// todo
+
+
+void swap(char **str1, char **str2)
+{
+    char *temp;
+
+    temp = *str1;
+    *str1 = *str2;
+    *str2 = temp;
+}
+/* what a shity algorithm*/
+
+void bubblesort(char **tab, int len)
+{   
+    char *temp;
+    int i;
+    int j;
+
+    i = 0;
+    while (i < len -1)
+    {
+        j = i + 1;
+        while (j < len)
+        {
+            if (strcmp(tab[j], tab[i]) < 0)
+                swap(&tab[j], &tab[i]);
+            j++;
+        }
+        i++;
+    }
+    
+}
+
 void free_struct_file(void *red)
 {
     char *temp;
