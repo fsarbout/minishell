@@ -1,6 +1,6 @@
 #include "hash_table.h"
 
-void xxx(char *key, char *value, char **dist , int *i)
+void key_value(char *key, char *value, char **dist , int *i)
 {
     char *temp;
 
@@ -40,7 +40,7 @@ char **hash_to_arr(t_hash_map *hm, int flag)
                 if (flag)
                     tab[i++] = temp->key;
                 else
-                    xxx(temp->key, temp->value, &tab[i], &i);
+                    key_value(temp->key, temp->value, &tab[i], &i);
              }
             temp = temp->next;
         } 
