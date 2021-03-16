@@ -19,7 +19,6 @@ void add_new_key(const char *key, const char *value, t_hash_map *hm, int alone)
 {
     t_listo *item;
 
-
     item = new_item(key, value);
     if (!alone)
         item->next = hm->item[hash(key,hm->size)];
@@ -47,6 +46,9 @@ void set_value(const char *key, const char *value, t_hash_map *hm)
             {
                 free(temp->value);
                 temp->value = ft_strdup(value);
+                /**/
+
+                /**/
             }
     }
     else
