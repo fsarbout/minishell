@@ -6,7 +6,7 @@
 /*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 16:27:45 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/16 07:15:44 by fsarbout         ###   ########.fr       */
+/*   Updated: 2021/03/16 09:30:31 by fsarbout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int is_valide_var(char *str)
     str++;
     while (*str)
     {
-        if (!(ft_isalnum(*str)))
+        if (!(ft_isalnum(*str)) && *str != '_')
             return 0;
         str++;
     }
@@ -82,14 +82,12 @@ int     export(t_command command, t_hash_map *env)
     t_list *temp;
     char **envs;
     int i = 0;
-    int j;
     
     temp = command.args->next;
     if (!temp)
     {
         envs = hash_to_arr(env);
-        j = array_lenght(envs);
-        while (*envs[i] && (i < j - 1))
+        while (envs[i])
         {
             ft_putendl_fd("declare -x ", STDOUT_FILENO, 0);
             ft_putendl_fd(envs[i], STDOUT_FILENO, 1);
@@ -102,7 +100,11 @@ int     export(t_command command, t_hash_map *env)
     {
         str = ft_split((char *)temp->content, '=');
         if (is_valide_var(str[0]))
+        {
             set_value(str[0], str[1], env);
+            if (!str[1] && ft_strchr_eql((char *)temp->content , '='))
+                set_value(str[0], "\"\"", env);   
+        }
         else
             print_error("not valide identifier", 1, env);
         temp = temp->next;

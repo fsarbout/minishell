@@ -6,7 +6,7 @@
 /*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 16:28:10 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/13 16:57:54 by fsarbout         ###   ########.fr       */
+/*   Updated: 2021/03/16 09:20:25 by fsarbout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,19 @@ int	ft_strchr_n(const char *s, int c)
 	{
         
         if (s[j] != (char)c)
+            return (1);
+		j++;
+	}
+    return (0);
+}
+
+int	ft_strchr_eql(const char *s, int c)
+{
+	int j = 0;
+	
+	while (s[j])
+	{
+        if (s[j] == (char)c)
             return (1);
 		j++;
 	}
