@@ -48,6 +48,7 @@ void swap(char **str1, char **str2)
     *str1 = *str2;
     *str2 = temp;
 }
+
 /* what a shity algorithm*/
 
 void bubblesort(char **tab, int len)
@@ -61,7 +62,6 @@ void bubblesort(char **tab, int len)
         j = i + 1;
         while (j < len)
         {   
-            printf("%s|%s\n", tab[j], tab[i]);
             if (strcmp(tab[j], tab[i]) < 0)
                 swap(&tab[j], &tab[i]);
             j++;
