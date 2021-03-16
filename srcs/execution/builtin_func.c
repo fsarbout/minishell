@@ -6,7 +6,7 @@
 /*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 16:27:45 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/16 18:34:10 by htagrour         ###   ########.fr       */
+/*   Updated: 2021/03/16 18:40:57 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void add_env(char *str, t_hash_map *env)
     {
         while (str[i])
         {
-            if (!(ft_isalnum(str[i]) || str[i] == '_' || str[i] == '='))
+            if (!(ft_isalnum(str[i]) || str[i] == '_' || str[i] == '=' || str[i] == 32))
                 print_error("not valide identifier", 1, env);
             if (str[i] == '=')
             {
