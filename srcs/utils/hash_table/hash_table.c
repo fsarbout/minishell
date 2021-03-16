@@ -43,10 +43,10 @@ void set_value(const char *key, const char *value, t_hash_map *hm)
         if (!temp)
             add_new_key(key, value, hm,0);
         else
-            {
-                free(temp->value);
-                temp->value = ft_strdup(value);
-            }
+        {
+            free(temp->value);
+            temp->value = ft_strdup(value);
+        }
     }
     else
         add_new_key(key, value, hm, 1);

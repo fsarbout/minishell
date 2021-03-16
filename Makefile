@@ -6,7 +6,7 @@
 #    By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/22 16:29:25 by htagrour          #+#    #+#              #
-#    Updated: 2021/03/16 09:54:59 by fsarbout         ###   ########.fr        #
+#    Updated: 2021/03/16 11:46:26 by fsarbout         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ SRC = 	srcs/utils/get_line/*.c\
 all : $(NAME)
 
 $(NAME): $(SRC)
-	@$(CC) $(SRC) -o $(NAME)
+	@$(CC) $(SRC) -o $(NAME) -g
 	
 clean:
 	@rm -rf *.o minishell.a

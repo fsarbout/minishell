@@ -6,7 +6,7 @@
 /*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 16:27:45 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/16 09:06:48 by htagrour         ###   ########.fr       */
+/*   Updated: 2021/03/16 12:13:47 by fsarbout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,33 @@ int pwd()
     free(current_path);
     return (0);
 }
-// void print_env()
+
+void add_env(char *str, t_hash_map *env)
+{
+    char **string;
+    int i = 0;
+    int k = ft_strlen(str);
+
+    if (!ft_isalpha(*str) && *str != '_')
+        print_error("not valide identifier", 1, env);
+    if (!ft_strchr_eql(str , '='))
+        set_value(str, 0, env);
+    else
+    {
+        while (str[i])
+        {
+            if (!(ft_isalnum(str[i])) && str[i] != '_' && str[i] != '=')
+                print_error("not valide identifier", 1, env);
+            if (str[i] == '=')
+            {
+                string[0] = ft_substr(str, 0 , i);
+                string[1] = ft_substr(str , i + 1, k - i);
+                set_value(string[0], string[1] , env);
+            }
+            i++;
+        }
+    }
+}
 
 int     export(t_command command, t_hash_map *env)
 {
@@ -98,15 +124,7 @@ int     export(t_command command, t_hash_map *env)
     }
     while (temp)
     {
-        str = ft_split((char *)temp->content, '=');
-        if (is_valide_var(str[0]))
-        {
-            set_value(str[0], str[1], env);
-            if (!str[1] && ft_strchr_eql((char *)temp->content , '='))
-                set_value(str[0], "\"\"", env);   
-        }
-        else
-            print_error("not valide identifier", 1, env);
+        add_env((char *)temp->content, env);
         temp = temp->next;
     }
     return (0);
