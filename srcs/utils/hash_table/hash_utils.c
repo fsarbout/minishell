@@ -1,6 +1,6 @@
 #include "hash_table.h"
 
-void xxx(char *key, char *value, char **dist)
+void xxx(char *key, char *value, char **dist , int *i)
 {
     char *temp;
 
@@ -10,6 +10,7 @@ void xxx(char *key, char *value, char **dist)
                 temp = ft_strjoin(key, "=");
                 *dist = ft_strjoin(temp, value);
                 free(temp);
+                *i = *i + 1;
             }
 }
 /*
@@ -36,11 +37,10 @@ char **hash_to_arr(t_hash_map *hm, int flag)
         {
              if (strcmp(temp->key, "?"))
              {
-            if (flag)
-                tab[i] = temp->key;
-            else
-                xxx(temp->key, temp->value, &tab[i]);
-                i++;
+                if (flag)
+                    tab[i++] = temp->key;
+                else
+                    xxx(temp->key, temp->value, &tab[i], &i);
              }
             temp = temp->next;
         } 
@@ -57,7 +57,7 @@ char **sorted_key(t_hash_map *hm)
     if (!tab)
         return NULL;
     tab = hash_to_arr(hm, 1);
-    bubblesort(tab, hm->elem_total);
+    bubblesort(tab, hm->elem_total - 1);
     return (tab);
 }
 

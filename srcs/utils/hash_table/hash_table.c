@@ -44,8 +44,11 @@ void set_value(const char *key, const char *value, t_hash_map *hm)
             add_new_key(key, value, hm,0);
         else
         {
+            if(value)
+            {
             free(temp->value);
             temp->value = ft_strdup(value);
+            }
         }
     }
     else

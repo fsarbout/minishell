@@ -107,7 +107,7 @@ int main (int argc, char *argv[], char **envs)
 
     
 
-    env = init_hash_map(100);
+    env = init_hash_map(30);
     get_external_env(envs, env);
     // int fd = open("test.txt", O_RDONLY);
     ignore_signals();
