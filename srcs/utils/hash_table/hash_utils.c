@@ -17,15 +17,18 @@ char **hash_to_arr(t_hash_map *hm)
     {
         temp = hm->item[size];
         while (temp)
-        {   
-            if (temp->value)
+        {
+            if (strcmp(temp->key, "?"))
             {
-                temp1 = ft_strjoin(temp->key, "=");
-                tab[i++] = ft_strjoin(temp1, temp->value);
-                free(temp1);
+                if (temp->value)
+                {
+                    temp1 = ft_strjoin(temp->key, "=");
+                    tab[i++] = ft_strjoin(temp1, temp->value);
+                    free(temp1);
+                }
+                else
+                    tab[i++] = ft_strdup("");
             }
-            else
-                tab[i++] = ft_strdup("");
             temp = temp->next;
         } 
     }

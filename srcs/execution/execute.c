@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 16:27:58 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/15 16:56:30 by htagrour         ###   ########.fr       */
+/*   Updated: 2021/03/16 09:45:30 by fsarbout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,5 +198,6 @@ int execute_commands(t_command *commands, int last_fd,int total, t_hash_map *env
         ret = execute_commands(commands+1, fds[0],total,env);
     close(fds[0]);
     waitpid(pid,&ret, 0);
+    g_flag = 0;
     return (get_return_status(ret, env, commands));
 }
