@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_func.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 16:27:45 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/16 12:21:39 by htagrour         ###   ########.fr       */
+/*   Updated: 2021/03/16 12:56:01 by fsarbout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,10 @@ int pwd()
 
 void add_env(char *str, t_hash_map *env)
 {
-    char **string;
+    char *key;
     int i = 0;
     int k = ft_strlen(str);
+    char *value;
 
     if (!ft_isalpha(*str) && *str != '_')
         print_error("not valide identifier", 1, env);
@@ -89,13 +90,15 @@ void add_env(char *str, t_hash_map *env)
     {
         while (str[i])
         {
-            if (!(ft_isalnum(str[i])) && str[i] != '_' && str[i] != '=')
+            if (!(ft_isalnum(str[i]) || str[i] == '_' || str[i] == '='))
                 print_error("not valide identifier", 1, env);
             if (str[i] == '=')
             {
-                string[0] = ft_substr(str, 0 , i);
-                string[1] = ft_substr(str , i + 1, k - i);
-                set_value(string[0], string[1] , env);
+                key = ft_substr(str, 0 , i);
+                value = ft_substr(str , i + 1, k - i);
+                set_value(key, value, env);
+                free(key);
+                free(value);
             }
             i++;
         }
@@ -106,17 +109,23 @@ int     export(t_command command, t_hash_map *env)
 {
     char **str;
     t_list *temp;
-    char **envs;
+    char **keys;
     int i = 0;
+    char *value;
     
     temp = command.args->next;
     if (!temp)
     {
-        envs = sorted_key(env);
-        while (envs[i])
+        keys = sorted_key(env);
+        while (keys[i])
         {
             ft_putendl_fd("declare -x ", STDOUT_FILENO, 0);
-            ft_putendl_fd(envs[i], STDOUT_FILENO, 1);
+            ft_putendl_fd(keys[i], STDOUT_FILENO, 0);
+            value = get_value(keys[i], env);
+            ft_putendl_fd("=\"", STDOUT_FILENO , 0);
+            ft_putendl_fd(value, STDOUT_FILENO , 0);
+            ft_putendl_fd("\"", STDOUT_FILENO , 1);
+            free(value);
             i++;
         }
         //free_array((void**)envs);
