@@ -6,7 +6,7 @@
 /*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 16:27:45 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/16 17:07:01 by htagrour         ###   ########.fr       */
+/*   Updated: 2021/03/16 18:34:10 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,10 +122,14 @@ int     export(t_command command, t_hash_map *env)
             ft_putendl_fd("declare -x ", STDOUT_FILENO, 0);
             ft_putendl_fd(keys[i], STDOUT_FILENO, 0);
             value = get_value(keys[i], env);
-            ft_putendl_fd("=\"", STDOUT_FILENO , 0);
-            ft_putendl_fd(value, STDOUT_FILENO , 0);
-            ft_putendl_fd("\"", STDOUT_FILENO , 1);
-            free(value);
+            if (value)
+            {   
+                ft_putendl_fd("=\"", STDOUT_FILENO , 0);
+                ft_putendl_fd(value, STDOUT_FILENO , 0);
+                ft_putchar_fd('\"', STDOUT_FILENO);
+                free(value);
+            }
+            ft_putchar_fd('\n', STDOUT_FILENO);
             i++;
         }
         //free_array((void**)envs);
