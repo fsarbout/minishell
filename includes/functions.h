@@ -6,7 +6,7 @@
 /*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 16:17:26 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/13 16:46:14 by fsarbout         ###   ########.fr       */
+/*   Updated: 2021/03/16 09:21:14 by fsarbout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,6 @@ t_command *get_commands(char **temp, int total, t_hash_map *env);
 int array_lenght(char **str);
 void echo_check_n(char **args, int *flag);
 int ft_strchr_n(const char *s, int c);
+int	ft_strchr_eql(const char *s, int c);
 
 #endif
