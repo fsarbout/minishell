@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
+/*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 16:27:58 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/16 09:45:30 by fsarbout         ###   ########.fr       */
+/*   Updated: 2021/03/16 11:50:49 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,7 @@ int start_process(t_command command, int last_fd, int fds[], t_hash_map *env)
         if (get_full_path(&command, env))
             exit(print_error("command not found", 127,env));
         connect_pipes(command, last_fd, fds);
-        envs = hash_to_arr(env);
+        envs = hash_to_arr(env, 0);
         args = list_to_array(command.args);
         if (built_in1(command, env) &&  built_in2(args, env))
                 execve(*args, args, envs);

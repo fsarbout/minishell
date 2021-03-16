@@ -2,7 +2,6 @@
 #define HASH_TABLE_H
 
 #define HASH_SIZE 120
-
 #include <stdlib.h>
 #include <string.h>
 #include "../libft/libft.h"
@@ -26,6 +25,7 @@ char *get_value(const char *key, t_hash_map *hm);
 void set_value(const char *key, const char *value, t_hash_map *hm);
 int free_hash_map(t_hash_map *hm);
 void delet_value(const char *key, t_hash_map *hm);
-char **hash_to_arr(t_hash_map *hm);
-
+char **hash_to_arr(t_hash_map *hm, int flag);
+char **sorted_key(t_hash_map *hm);
+void bubblesort(char **tab, int len);
 #endif

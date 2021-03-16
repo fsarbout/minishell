@@ -1,12 +1,30 @@
 #include "hash_table.h"
 
-char **hash_to_arr(t_hash_map *hm)
+void xxx(char *key, char *value, char **dist)
+{
+    char *temp;
+
+    if (strcmp(key, "?"))
+        {
+            if (value)
+            {
+                temp = ft_strjoin(key, "=");
+                *dist = ft_strjoin(temp, value);
+                free(temp);
+            }
+        }
+}
+/*
+    if flag == 1 this function will retun array of key
+    else will retunr array of key=value
+*/
+
+char **hash_to_arr(t_hash_map *hm, int flag)
 {
     char **tab;
     t_listo *temp;
     int i;
     int size;
-    char *temp1;
 
     i = 0;
     size = hm->size;
@@ -18,22 +36,28 @@ char **hash_to_arr(t_hash_map *hm)
         temp = hm->item[size];
         while (temp)
         {
-            if (strcmp(temp->key, "?"))
-            {
-                if (temp->value)
-                {
-                    temp1 = ft_strjoin(temp->key, "=");
-                    tab[i++] = ft_strjoin(temp1, temp->value);
-                    free(temp1);
-                }
-                else
-                    tab[i++] = ft_strdup("");
-            }
+            if (flag)
+                tab[i] = temp->key;
+            else
+                xxx(temp->key, temp->value, &tab[i]);
+            i++;
             temp = temp->next;
         } 
     }
     tab[i] = NULL;
     return tab;
+}
+
+char **sorted_key(t_hash_map *hm)
+{
+    char **tab;
+
+    tab = malloc(sizeof(char*) * (hm->elem_total + 1));
+    if (!tab)
+        return NULL;
+    tab = hash_to_arr(hm, 1);
+    bubblesort(tab, hm->elem_total);
+    return (tab);
 }
 
 int free_hash_map(t_hash_map *hm)

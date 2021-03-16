@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_func.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
+/*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 16:27:45 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/16 12:13:47 by fsarbout         ###   ########.fr       */
+/*   Updated: 2021/03/16 12:21:39 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,14 +112,14 @@ int     export(t_command command, t_hash_map *env)
     temp = command.args->next;
     if (!temp)
     {
-        envs = hash_to_arr(env);
+        envs = sorted_key(env);
         while (envs[i])
         {
             ft_putendl_fd("declare -x ", STDOUT_FILENO, 0);
             ft_putendl_fd(envs[i], STDOUT_FILENO, 1);
             i++;
         }
-        free_array((void**)envs);
+        //free_array((void**)envs);
         return (0);
     }
     while (temp)
@@ -179,7 +179,7 @@ int env(char **args, t_hash_map *env)
 
     if (!*args)
     {
-        envs = hash_to_arr(env);
+        envs = hash_to_arr(env, 0);
 	    i = -1;
         while(envs[++i])
             if (*envs[i])
