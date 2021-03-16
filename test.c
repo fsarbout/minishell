@@ -15,8 +15,6 @@ void print(char **tab)
 {
     while (*tab)
     {
-
-    
         printf("%s\n", *tab);
         tab++;
     } 
@@ -25,9 +23,9 @@ int main(int a, char *args[], char **envs)
 {
     t_hash_map *env;
 
-    env = init_hash_map(100);
+    env = init_hash_map(10);
+    set_value("hello", NULL, env);
     get_external_env(envs, env);
-    print(sorted_key(env));
     return (0);
 
 }
