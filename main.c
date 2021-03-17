@@ -83,7 +83,7 @@ int process_line(char *line, t_hash_map *env)
     int total;
     temp1 = updated_split(line, ';', &i);
     if (!temp1)
-        return (free_error(temp1, env));
+        return (print_error("syntax error", 258, env));
     i = -1;
     while (temp1[++i])
     {

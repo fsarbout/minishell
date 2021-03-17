@@ -6,7 +6,7 @@
 /*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 16:27:58 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/16 11:50:49 by htagrour         ###   ########.fr       */
+/*   Updated: 2021/03/16 19:04:47 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,9 +120,10 @@ int get_out_fd(t_command command, int *out_fd)
             fd = open(red->file, O_RDWR| O_CREAT | O_TRUNC, 0644);
         if (fd < 0)
             return (-1);
+        close(*out_fd);
+        *out_fd = fd;
         temp = temp->next;
     }
-    *out_fd = fd; 
     return (0);
 }
 
@@ -157,6 +158,8 @@ int start_process(t_command command, int last_fd, int fds[], t_hash_map *env)
         sig_default_mode();
         if (get_in_fd(command, &last_fd)|| get_out_fd(command, &fds[1]))
             exit(print_error("FIle ERROR", 1,env));
+        if (!command.args)
+            exit(0);
         if (get_full_path(&command, env))
             exit(print_error("command not found", 127,env));
         connect_pipes(command, last_fd, fds);
@@ -190,7 +193,7 @@ int execute_commands(t_command *commands, int last_fd,int total, t_hash_map *env
     int fds[2];
     int ret;
 
-    if ((total == 1) && built_in1(*commands, env) != -1)
+    if ((total == 1) && commands->args && built_in1(*commands, env) != -1)
         return (0);
     pipe(fds);
     int pid = start_process(*commands, last_fd,fds, env);
@@ -198,6 +201,5 @@ int execute_commands(t_command *commands, int last_fd,int total, t_hash_map *env
         ret = execute_commands(commands+1, fds[0],total,env);
     close(fds[0]);
     waitpid(pid,&ret, 0);
-    g_flag = 0;
     return (get_return_status(ret, env, commands));
 }
