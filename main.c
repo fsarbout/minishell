@@ -32,17 +32,15 @@ void print_command(t_command commands ,t_hash_map *env)
 
 void print_shell()
 {
-    if (g_flag)
-        ft_putstr_fd("\33[2K\r", STDOUT_FILENO);
     ft_putstr_fd(BGRN, STDOUT_FILENO);
     ft_putstr_fd("my_shell😎>", STDOUT_FILENO);
     ft_putstr_fd(RESET, STDOUT_FILENO);
 }
-//need to be done
+
 void  sig_handler(int sig)
 {
     ft_putstr_fd("\b\b  \b\b", STDOUT_FILENO);
-    if (sig == SIGINT)
+    if (sig == SIGINT && !g_flag)
     {
         ft_putstr_fd("\n",STDOUT_FILENO);
         print_shell();
@@ -109,10 +107,10 @@ int main (int argc, char *argv[], char **envs)
 
     env = init_hash_map(30);
     get_external_env(envs, env);
-    // int fd = open("test.txt", O_RDONLY);
     ignore_signals();
+    // int fd = open("test.txt", O_RDONLY);
     while (i > 0)
-    {
+    {   
         print_shell();
         i = get_next_line(STDIN_FILENO, &line);
         if (line[0])
@@ -123,3 +121,4 @@ int main (int argc, char *argv[], char **envs)
 
     return 0;
 }
+

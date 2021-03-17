@@ -6,13 +6,13 @@
 /*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 16:27:45 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/17 12:19:33 by htagrour         ###   ########.fr       */
+/*   Updated: 2021/03/17 19:32:38 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int is_valide_var(char *str)
+int is_valide_key(char *str)
 {   
     if (!ft_isalpha(*str))
         return (0);
@@ -38,28 +38,41 @@ int is_valide_exit(char *str)
     }
     return (1);
 }
-
-int cd(t_command command, t_hash_map *env)
+int change_dir(t_command command, char **path, char **old_path,t_hash_map *env)
 {
     char *temp;
-    char *path;
-    char *old_path;
+
     
-    old_path = getcwd(NULL, 1024);
     if (command.args->next)
     {
         temp =(char*) command.args->next->content;
-        if (temp[0]== '~')
-            path = ft_strjoin("/Users/htagrour", temp + 1);
+        if (!strcmp(temp,"-"))
+            *path = get_value("OLDPWD", env);
         else
-            path = ft_strdup(temp);
+        {
+            if (temp[0]== '~')
+                *path = ft_strjoin("/Users/htagrour", temp + 1);
+            else
+                *path = ft_strdup(temp);
+        }
     }
     else
-        path = ft_strdup("/Users/htagrour");
-    if (chdir(path) != 0)
+        *path = ft_strdup("/Users/htagrour");
+    *old_path = getcwd(NULL, 1024); 
+    if (chdir(*path) != 0)
         return (print_error("PATH not exist or a file", 1, env));
-    set_value("OLDPWD", old_path, env);
-    set_value("PWD", path, env);
+    return (0);
+}
+int cd(t_command command, t_hash_map *env)
+{
+    char *path;
+    char *old_path;
+    
+    if (!change_dir(command, &path, &old_path, env))
+    {
+        set_value("OLDPWD", old_path, env);
+        set_value("PWD", path, env);
+    }
     free(path);
     free(old_path);
     return (0);
@@ -79,30 +92,21 @@ int  add_env(char *str, t_hash_map *env)
 {
     char *key;
     int i = 0;
-    int k = ft_strlen(str);
+    int index;
     char *value;
 
-    if (!ft_isalpha(*str) && *str != '_')
-        return (print_error("not a valide identifier", 1, env));
-    if (!ft_strchr_eql(str , '='))
-        set_value(str, 0, env);
-    else
+    index = ft_strchr_eql(str , '=');
+    key = ft_substr(str, 0, index);
+    if (!is_valide_key(key))
     {
-        while (str[i])
-        {
-            if (!(ft_isalnum(str[i]) || str[i] == '_' || str[i] == '=' || str[i] == 32))
-                print_error("not a valide identifier", 1, env);
-            if (str[i] == '=')
-            {
-                key = ft_substr(str, 0 , i);
-                value = ft_substr(str , i + 1, k - i);
-                set_value(key, value, env);
-                free(key);
-                free(value);
-            }
-            i++;
-        }
+        free(key);
+        return (print_error("not a valide identifier", 1, env));
     }
+    if (str[index] != '=')
+        set_value(key, NULL, env);
+    else
+        set_value(key, str + index + 1, env);
+    free(key);
     return (0);
 }
 
@@ -150,13 +154,13 @@ int     export(t_command command, t_hash_map *env)
 int unset(t_command command, t_hash_map *env)
 {
     t_list *temp;
-    char *str;
+    char *key;
 
     temp = command.args->next;
     while (temp)
-    {   str = (char*)temp->content;
-        if (is_valide_var(str))
-            delet_value(str, env);
+    {   key = (char*)temp->content;
+        if (is_valide_key(key))
+            delet_value(key, env);
         else
             print_error("not valide identifier", 1, env);
         temp = temp->next;
@@ -166,6 +170,8 @@ int unset(t_command command, t_hash_map *env)
 
 int echo(char **args)
 {
+    // echo '' >file \" >foile2 echo souad "hana"souad
+    //echo "" "" '' '' '' "" '' "" hamza|cat -e
     int flag;
    
     flag = 0;
