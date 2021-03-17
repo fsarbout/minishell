@@ -53,7 +53,7 @@ char **sorted_key(t_hash_map *hm)
 {
     char **tab;
 
-    tab = malloc(sizeof(char*) * (hm->elem_total + 1));
+    tab = malloc(sizeof(char*) * (hm->elem_total));
     if (!tab)
         return NULL;
     tab = hash_to_arr(hm, 1);

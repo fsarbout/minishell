@@ -6,7 +6,7 @@
 /*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 16:27:45 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/16 18:40:57 by htagrour         ###   ########.fr       */
+/*   Updated: 2021/03/17 12:19:33 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ int cd(t_command command, t_hash_map *env)
     {
         temp =(char*) command.args->next->content;
         if (temp[0]== '~')
-            path = ft_strjoin("/home/htagrour", temp + 1);
+            path = ft_strjoin("/Users/htagrour", temp + 1);
         else
             path = ft_strdup(temp);
     }
     else
-        path = ft_strdup("/home/htagrour");
+        path = ft_strdup("/Users/htagrour");
     if (chdir(path) != 0)
         return (print_error("PATH not exist or a file", 1, env));
     set_value("OLDPWD", old_path, env);
@@ -75,7 +75,7 @@ int pwd()
     return (0);
 }
 
-void add_env(char *str, t_hash_map *env)
+int  add_env(char *str, t_hash_map *env)
 {
     char *key;
     int i = 0;
@@ -83,7 +83,7 @@ void add_env(char *str, t_hash_map *env)
     char *value;
 
     if (!ft_isalpha(*str) && *str != '_')
-        print_error("not valide identifier", 1, env);
+        return (print_error("not a valide identifier", 1, env));
     if (!ft_strchr_eql(str , '='))
         set_value(str, 0, env);
     else
@@ -91,7 +91,7 @@ void add_env(char *str, t_hash_map *env)
         while (str[i])
         {
             if (!(ft_isalnum(str[i]) || str[i] == '_' || str[i] == '=' || str[i] == 32))
-                print_error("not valide identifier", 1, env);
+                print_error("not a valide identifier", 1, env);
             if (str[i] == '=')
             {
                 key = ft_substr(str, 0 , i);
@@ -103,19 +103,14 @@ void add_env(char *str, t_hash_map *env)
             i++;
         }
     }
+    return (0);
 }
 
-int     export(t_command command, t_hash_map *env)
+int print_env(t_hash_map *env)
 {
-    char **str;
-    t_list *temp;
-    char **keys;
-    int i = 0;
     char *value;
-    
-    temp = command.args->next;
-    if (!temp)
-    {
+    int i = 0;
+    char **keys;
         keys = sorted_key(env);
         while (keys[i])
         {
@@ -132,9 +127,18 @@ int     export(t_command command, t_hash_map *env)
             ft_putchar_fd('\n', STDOUT_FILENO);
             i++;
         }
-        //free_array((void**)envs);
-        return (0);
-    }
+        free((void**)keys);
+    return (0);
+}
+
+int     export(t_command command, t_hash_map *env)
+{
+    char **str;
+    t_list *temp;
+    
+    temp = command.args->next;
+    if (!temp)
+        return print_env(env);
     while (temp)
     {
         add_env((char *)temp->content, env);

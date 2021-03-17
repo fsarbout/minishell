@@ -6,13 +6,12 @@
 /*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 16:27:58 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/16 19:04:47 by htagrour         ###   ########.fr       */
+/*   Updated: 2021/03/17 12:22:02 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-// i need to learn about muliple processing
 int is_built_in(char *str)
 {
     return (!strcmp(str,"cd") ||
@@ -97,9 +96,10 @@ int get_in_fd(t_command command, int *last_fd)
         red = (t_redx*)temp->content;
         if ((fd = open(red->file,O_RDONLY)) < 0)
             return (-1);
+        close(*last_fd);
+        *last_fd = fd;
         temp = temp->next;
     }
-    *last_fd = fd;
     return (0);
 }
 
@@ -193,7 +193,8 @@ int execute_commands(t_command *commands, int last_fd,int total, t_hash_map *env
     int fds[2];
     int ret;
 
-    if ((total == 1) && commands->args && built_in1(*commands, env) != -1)
+    if ((total == 1) &&
+        built_in1(*commands, env) != -1)
         return (0);
     pipe(fds);
     int pid = start_process(*commands, last_fd,fds, env);
