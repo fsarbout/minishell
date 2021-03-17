@@ -6,13 +6,13 @@
 #    By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/22 16:29:25 by htagrour          #+#    #+#              #
-#    Updated: 2021/03/17 11:10:09 by htagrour         ###   ########.fr        #
+#    Updated: 2021/03/17 17:49:59 by htagrour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-CC = gcc -fsanitize=address
+CC = gcc -fsanitize=address -g
 
 CFLAGS = -Wall -Wextra -Werror
 

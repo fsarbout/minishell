@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_args.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
+/*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 16:28:32 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/13 16:58:56 by fsarbout         ###   ########.fr       */
+/*   Updated: 2021/03/17 19:43:56 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ void			get_argument(char **str, char **ptr,
 	{
 		temp = *ptr;
 		if (**str != '$' || (bag->brack_flag && bag->spec_char == '\'') ||
-			(**str == '$' && belong("<>'\" ", *(*str + 1))))
+			(**str == '$' && (belong("<>'\" |", *(*str + 1)) || !*(*str+1))))
 			*ptr = ft_add_char(*ptr, **str);
 		else
 		{
 			(*str)++;
-			if (**str != '?')
-				while (*(*str + len) && !belong("<>'\" ?", *(*str + len)))
+			if (**str != '?' || !belong("<>'\"| \\?", **str))
+				while (*(*str + len) && !belong("<>'\"| \\?", *(*str + len)))
 					len++;
 			else
 				len++;
@@ -51,10 +51,7 @@ int				extract_arg(t_command *command, char **str,
 			!((**str == ' ' || (is_red(**str) && !bag->slash_flag)) &&
 			!bag->brack_flag))
 		get_argument(str, &arg, bag, env);
-	if (arg[0])
-		ft_lstadd_back(&(command->args), ft_lstnew((void*)arg));
-	else
-		free(arg);
+	ft_lstadd_back(&(command->args), ft_lstnew((void*)arg));
 	return (1);
 }
 
