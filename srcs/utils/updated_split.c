@@ -23,7 +23,11 @@ static int		get_word_number(char const *str, char del, int *wn)
 	while (*str)
 	{
 		while(*str == ' ' && !bag.brack_flag)
+		{
+			adjust_var_bag(&bag, *str);
 			str++;
+		}
+
 		if (*str)
 		{
 			if (*str == del && !bag.brack_flag && !bag.slash_flag)
@@ -41,7 +45,7 @@ static int		get_word_number(char const *str, char del, int *wn)
 			str++;
 		}
 	}
-	if (bag.brack_flag || (del_flag && del == '|'))
+	if (bag.brack_flag || (del_flag && del == '|') || bag.slash_flag)
 		return (-1);
 	return (*wn);
 }

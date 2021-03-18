@@ -38,6 +38,7 @@ int is_valide_exit(char *str)
     }
     return (1);
 }
+
 int change_dir(t_command command, char **path, char **old_path,t_hash_map *env)
 {
     char *temp;
@@ -115,6 +116,7 @@ int print_env(t_hash_map *env)
     char *value;
     int i = 0;
     char **keys;
+
         keys = sorted_key(env);
         while (keys[i])
         {
@@ -131,7 +133,7 @@ int print_env(t_hash_map *env)
             ft_putchar_fd('\n', STDOUT_FILENO);
             i++;
         }
-        free((void**)keys);
+        free_array((void**)keys);
     return (0);
 }
 
@@ -142,7 +144,7 @@ int     export(t_command command, t_hash_map *env)
     
     temp = command.args->next;
     if (!temp)
-        return print_env(env);
+        return (print_env(env));
     while (temp)
     {
         add_env((char *)temp->content, env);
@@ -230,28 +232,35 @@ int exit_(t_command cmd, t_hash_map *env)
     return (0);
 }
 
-int built_in1(t_command command, t_hash_map *env)
+int built_in1(t_command command, t_hash_map *env, int flag)
 {
     char *cmd;
     int res;
+    int out_fd;
 
-    res = -1;
+    out_fd = STDOUT_FILENO;
     cmd = (char*)command.args->content;
-    if(!strcmp("cd", cmd))
-        res = cd(command, env);
-    if (!strcmp("unset", cmd))
-        res = unset(command, env);
-    if (!strcmp("export", cmd))
-        res = export(command, env);
-    if (!strcmp("exit", cmd))
-        res = exit_(command, env);
-    return (res);    
+    if (cmd && (res = is_buitin1(cmd)) == -1)
+            return (-1);
+    if (flag)
+        if (get_in_fd(command, &out_fd)|| get_out_fd(command, &out_fd))
+            return(print_error("FIle ERROR", 1,env));
+    if(res == 1)
+        return (cd(command, env));
+    if (res == 2)
+        return (export(command, env));
+    if (res == 3)
+        return (unset(command, env));
+    if (res == 4)
+        return (exit_(command, env));
+    return (-1);
 }
+
 int built_in2(char **args, t_hash_map *envs)
 {
     int res;
     
-    res = 1;
+    res = -1;
     if (!strcmp(*args,"echo"))
         res = echo(args);
     if (!strcmp(*args, "pwd"))

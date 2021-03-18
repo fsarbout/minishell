@@ -35,10 +35,10 @@ char **hash_to_arr(t_hash_map *hm, int flag)
         temp = hm->item[size];
         while (temp)
         {
-             if (strcmp(temp->key, "?"))
+             if (temp->key && (temp->key, "?"))
              {
                 if (flag)
-                    tab[i++] = temp->key;
+                    tab[i++] = ft_strdup(temp->key);
                 else
                     key_value(temp->key, temp->value, &tab[i], &i);
              }
@@ -53,10 +53,9 @@ char **sorted_key(t_hash_map *hm)
 {
     char **tab;
 
-    tab = malloc(sizeof(char*) * (hm->elem_total));
-    if (!tab)
-        return NULL;
     tab = hash_to_arr(hm, 1);
+    if (!tab)
+        return (NULL);
     bubblesort(tab, hm->elem_total - 1);
     return (tab);
 }

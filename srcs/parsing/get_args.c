@@ -119,13 +119,16 @@ int				get_cmd(t_command *command, char *str, t_hash_map *env)
 			adjust_var_bag(&bag, *str);
 			str++;
 		}
-		if (is_red(*str) && !bag.slash_flag)
+		if (*str)
 		{
-			if (extract_file(command, &str, &bag, env) < 0)
-				return (print_error("syntax error", 258, env));
+			if (is_red(*str) && !bag.slash_flag)
+			{
+				if (extract_file(command, &str, &bag, env) < 0)
+					return (print_error("syntax error", 258, env));
+			}
+			else
+				extract_arg(command, &str, &bag, env);
 		}
-		else
-			extract_arg(command, &str, &bag, env);
 	}
 	return (0);
 }

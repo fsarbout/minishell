@@ -53,8 +53,8 @@ int			add_line(char **str, int fd)
 		free_(&tem);
 		if (isthereaback(*str))
 			break ;
-		// if (**str)
-		// 	i = 1;
+		if (**str)
+			i = 1;
 	}
 	return (i);
 }

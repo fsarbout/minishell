@@ -12,17 +12,33 @@
 
 #include "../../includes/minishell.h"
 
+int is_buitin1(char *str)
+{
+    if (!strcmp(str,"cd"))
+        return (1);
+    if (!strcmp(str,"export"))
+        return (2);
+    if (!strcmp(str,"unset"))
+        return (3);
+    if (!strcmp(str,"exit"))
+        return (4);
+    return (-1);
+}
+
+int is_buitin2(char *str)
+{
+    if (!strcmp(str,"echo"))
+        return (1);
+    if (!strcmp(str,"pwd"))
+        return (2);
+    if (!strcmp(str,"env"))
+        return (3);
+    return (-1);
+}
+
 int is_built_in(char *str)
 {
-    return (!strcmp(str,"cd") ||
-            !strcmp(str,"echo")||
-            !strcmp(str,"export") ||
-            !strcmp(str,"cd")||
-            !strcmp(str,"env")||
-            !strcmp(str,"unset")||
-            !strcmp(str,"pwd") ||
-            !strcmp(str, "exit")
-            );
+    return (is_buitin1(str) != -1 || is_buitin2(str) != -1);
 }
 
 void add_return(t_hash_map *env, int ret)
@@ -59,6 +75,8 @@ char *get_bin(char *cmd, struct stat st,t_hash_map *env)
         }
         free_array((void**)temp);
     }
+    else
+        free(path);
     return (NULL);
 }
 
@@ -166,7 +184,7 @@ int start_process(t_command command, int last_fd, int fds[], t_hash_map *env)
         connect_pipes(command, last_fd, fds);
         envs = hash_to_arr(env, 0);
         args = list_to_array(command.args);
-        if (built_in1(command, env) &&  built_in2(args, env))
+        if (built_in1(command, env, 0) == -1 &&  built_in2(args, env) == -1)
                 execve(*args, args, envs);
         else
             exit(EXIT_SUCCESS);
@@ -193,8 +211,8 @@ int execute_commands(t_command *commands, int last_fd,int total, t_hash_map *env
     int fds[2];
     int ret;
 
-    if ((total == 1) &&
-        built_in1(*commands, env) != -1)
+    if ((total == 1) && (*commands).args &&
+        built_in1(*commands, env, 1) != -1)
         return (0);
     pipe(fds);
     int pid = start_process(*commands, last_fd,fds, env);
