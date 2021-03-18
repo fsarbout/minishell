@@ -6,7 +6,7 @@
 /*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 16:28:32 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/18 09:40:16 by fsarbout         ###   ########.fr       */
+/*   Updated: 2021/03/18 12:22:59 by fsarbout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@ t_redx	*get_file(char **str, t_var_bag *bag, t_hash_map *env)
 	return (red);
 }
 
-int	extract_file(t_command *command, char **str, t_var_bag *bag, t_hash_map *env)
+int	extract_file(t_command *command, char **str
+		, t_var_bag *bag, t_hash_map *env)
 {
 	int		double_red;
 	int		type;

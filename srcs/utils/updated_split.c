@@ -6,7 +6,7 @@
 /*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 00:30:20 by htagrour          #+#    #+#             */
-/*   Updated: 2021/03/18 09:53:35 by fsarbout         ###   ########.fr       */
+/*   Updated: 2021/03/18 12:20:56 by fsarbout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ static char	**get_tokens(const char *str, int wnb, int del)
 			str++;
 		if (*str)
 		{
-			while (*(str + len) && !(*(str + len) == del && !bag.brack_flag && !bag.slash_flag))
+			while (*(str + len) && !(*(str + len) == del
+						 && !bag.brack_flag && !bag.slash_flag))
 			{
 				adjust_var_bag(&bag, *(str + len));
 				len++;
