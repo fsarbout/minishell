@@ -6,7 +6,7 @@
 /*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 10:32:50 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/18 10:48:41 by fsarbout         ###   ########.fr       */
+/*   Updated: 2021/03/18 12:16:16 by fsarbout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ t_listo	*new_item(const char *key, const char *value)
 	return (item);
 }
 
-void	add_new_key(const char *key, const char *value, t_hash_map *hm, int alone)
+void	add_new_key(const char *key, const char *value
+		 , t_hash_map *hm, int alone)
 {
 	t_listo	*item;
 

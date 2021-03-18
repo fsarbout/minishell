@@ -6,7 +6,7 @@
 /*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 09:06:05 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/18 09:13:13 by fsarbout         ###   ########.fr       */
+/*   Updated: 2021/03/18 12:18:36 by fsarbout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ int	get_return_status(int ret, t_hash_map *env, t_command *command)
 	return (0);
 }
 
-int	execute_commands(t_command *commands, int last_fd, int total, t_hash_map *env)
+int	execute_commands(t_command *commands, int last_fd, int total
+		, t_hash_map *env)
 {
 	int	fds[2];
 	int	ret;

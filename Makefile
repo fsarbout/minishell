@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+         #
+#    By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/22 16:29:25 by htagrour          #+#    #+#              #
-#    Updated: 2021/03/17 17:49:59 by htagrour         ###   ########.fr        #
+#    Updated: 2021/03/18 12:02:21 by fsarbout         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ SRC = 	srcs/utils/get_line/*.c\
 		srcs/utils/*.c\
 		srcs/parsing/*.c\
 		srcs/execution/*.c\
-		main.c
+		main.c\
+		utils.c
 
 all : $(NAME)
 
