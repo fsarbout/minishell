@@ -6,13 +6,13 @@
 /*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 00:30:20 by htagrour          #+#    #+#             */
-/*   Updated: 2021/03/13 16:31:16 by fsarbout         ###   ########.fr       */
+/*   Updated: 2021/03/18 09:53:35 by fsarbout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static int		get_word_number(char const *str, char del, int *wn)
+static int	get_word_number(char const *str, char del, int *wn)
 {
 	int			del_flag;
 	t_var_bag	bag;
@@ -22,12 +22,11 @@ static int		get_word_number(char const *str, char del, int *wn)
 	del_flag = 1;
 	while (*str)
 	{
-		while(*str == ' ' && !bag.brack_flag)
+		while (*str == ' ' && !bag.brack_flag)
 		{
 			adjust_var_bag(&bag, *str);
 			str++;
 		}
-
 		if (*str)
 		{
 			if (*str == del && !bag.brack_flag && !bag.slash_flag)
@@ -50,7 +49,7 @@ static int		get_word_number(char const *str, char del, int *wn)
 	return (*wn);
 }
 
-static char		**get_tokens(const char *str, int wnb, int del)
+static char	**get_tokens(const char *str, int wnb, int del)
 {
 	char		**tab;
 	int			j;
@@ -59,21 +58,21 @@ static char		**get_tokens(const char *str, int wnb, int del)
 
 	ft_bzero(&bag, sizeof(bag));
 	j = 0;
-	if (!(tab = malloc(sizeof(char*) * (wnb + 1))))
+	if (!(tab = malloc(sizeof(char *) * (wnb + 1))))
 		return (NULL);
 	while (*str != '\0')
 	{
 		len = 0;
-		while(*str == del)
+		while (*str == del)
 			str++;
 		if (*str)
 		{
 			while (*(str + len) && !(*(str + len) == del && !bag.brack_flag && !bag.slash_flag))
 			{
-				adjust_var_bag(&bag, *(str +len));
+				adjust_var_bag(&bag, *(str + len));
 				len++;
 			}
-			tab[j] = ft_substr(str, 0,len);
+			tab[j] = ft_substr(str, 0, len);
 			j++;
 			str += (len);
 		}
@@ -82,7 +81,7 @@ static char		**get_tokens(const char *str, int wnb, int del)
 	return (tab);
 }
 
-char			**updated_split(char const *str, char del, int *ele_number)
+char	**updated_split(char const *str, char del, int *ele_number)
 {
 	if (!str)
 		return (NULL);

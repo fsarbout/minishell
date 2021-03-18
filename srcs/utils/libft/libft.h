@@ -5,15 +5,22 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/11 13:09:03 by htagrour          #+#    #+#             */
-/*   Updated: 2021/03/14 18:26:49 by fsarbout         ###   ########.fr       */
+/*   Created: 2021/03/18 10:01:07 by fsarbout          #+#    #+#             */
+/*   Updated: 2021/03/18 10:04:49 by fsarbout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_LIBFT_H
-# define FT_LIBFT_H
+#ifndef LIBFT_H
+# define LIBFT_H
+
 # include <stdlib.h>
 # include <unistd.h>
+
+typedef struct s_list
+{
+	void			*content;
+	struct s_list	*next;
+}				t_list;
 
 int				ft_memcmp(const	void *s1, const void *s2, size_t n);
 void			*ft_memset(void *b, int c, size_t len);
@@ -49,13 +56,7 @@ char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void			ft_putendl_fd(char *s, int fd, int newlinw);
 void			ft_putnbr_fd(int nb, int fd);
 char			*ft_strtrim(char const *s1, char const *set);
-char 			*ft_add_char(const char *str, char c);
-
-typedef	struct	s_list
-{
-	void			*content;
-	struct s_list	*next;
-}				t_list;
+char			*ft_add_char(const char *str, char c);
 t_list			*ft_lstnew(void *content);
 void			ft_lstadd_front(t_list **alst, t_list *new);
 int				ft_lstsize(t_list *list);
@@ -65,4 +66,5 @@ void			ft_lstdelone(t_list *list, void (*del)(void*));
 void			ft_lstiter(t_list *list, void (*f)(void*));
 t_list			*ft_lstmap(t_list *list, void *(*f)(void*), void (*del)(void*));
 void			ft_lstclear(t_list **lst, void (*del)(void*));
+
 #endif

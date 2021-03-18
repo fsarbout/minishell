@@ -6,13 +6,13 @@
 /*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 23:06:29 by htagrour          #+#    #+#             */
-/*   Updated: 2021/03/15 19:23:45 by htagrour         ###   ########.fr       */
+/*   Updated: 2021/03/18 10:28:31 by fsarbout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		*ft_strdup(const char *str)
+char	*ft_strdup(const char *str)
 {
 	int		i;
 	char	*a;
