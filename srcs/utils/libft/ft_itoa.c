@@ -6,20 +6,20 @@
 /*   By: htagrour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 14:55:21 by htagrour          #+#    #+#             */
-/*   Updated: 2019/10/17 15:36:07 by htagrour         ###   ########.fr       */
+/*   Updated: 2021/03/18 10:22:44 by fsarbout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int				number_digit(int n)
+int	number_digit(int n)
 {
 	if (!n)
 		return (0);
 	return (1 + number_digit(n / 10));
 }
 
-char			*ft_itoa(int n)
+char	*ft_itoa(int n)
 {
 	int			len;
 	char		*tab;
@@ -35,7 +35,7 @@ char			*ft_itoa(int n)
 		len = number_digit(n);
 		a = n;
 	}
-	if (!(tab = (char*)malloc(sizeof(char) * len + 1)))
+	if (!(tab = (char *)malloc(sizeof(char) * len + 1)))
 		return (NULL);
 	tab[len] = '\0';
 	while (--len >= 0)

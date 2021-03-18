@@ -6,24 +6,24 @@
 /*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 16:28:32 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/17 19:43:56 by htagrour         ###   ########.fr       */
+/*   Updated: 2021/03/18 09:40:16 by fsarbout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void			get_argument(char **str, char **ptr,
-						t_var_bag *bag, t_hash_map *env)
+void	get_argument(char **str, char **ptr, t_var_bag *bag, t_hash_map *env)
 {
-	char		*temp;
-	int			len;
+	char	*temp;
+	int		len;
 
 	len = 0;
 	if (!conditions(**str, *bag, *(*str + 1)))
 	{
 		temp = *ptr;
-		if (**str != '$' || (bag->brack_flag && bag->spec_char == '\'') ||
-			(**str == '$' && (belong("<>'\" |", *(*str + 1)) || !*(*str+1))))
+		if (**str != '$' || (bag->brack_flag && bag->spec_char == '\'')
+					|| (**str == '$' && (belong("<>'\" |", *(*str + 1))
+						|| !*(*str + 1))))
 			*ptr = ft_add_char(*ptr, **str);
 		else
 		{
@@ -41,23 +41,21 @@ void			get_argument(char **str, char **ptr,
 	*str += (len) ? len : 1;
 }
 
-int				extract_arg(t_command *command, char **str,
-						t_var_bag *bag, t_hash_map *env)
+int	extract_arg(t_command *command, char **str, t_var_bag *bag, t_hash_map *env)
 {
-	char		*arg;
+	char	*arg;
 
 	arg = ft_strdup("");
-	while (**str &&
-			!((**str == ' ' || (is_red(**str) && !bag->slash_flag)) &&
-			!bag->brack_flag))
+	while (**str && !((**str == ' ' || (is_red(**str)
+					   	 && !bag->slash_flag)) && !bag->brack_flag))
 		get_argument(str, &arg, bag, env);
 	ft_lstadd_back(&(command->args), ft_lstnew((void*)arg));
 	return (1);
 }
 
-t_redx			*get_file(char **str, t_var_bag *bag, t_hash_map *env)
+t_redx	*get_file(char **str, t_var_bag *bag, t_hash_map *env)
 {
-	t_redx		*red;
+	t_redx	*red;
 
 	(*str)++;
 	while (**str && **str == ' ')
@@ -79,12 +77,11 @@ t_redx			*get_file(char **str, t_var_bag *bag, t_hash_map *env)
 	return (red);
 }
 
-int				extract_file(t_command *command, char **str,
-							t_var_bag *bag, t_hash_map *env)
+int	extract_file(t_command *command, char **str, t_var_bag *bag, t_hash_map *env)
 {
-	int			double_red;
-	int			type;
-	t_redx		*red;
+	int		double_red;
+	int		type;
+	t_redx	*red;
 
 	double_red = 0;
 	type = (**str == '<');
@@ -106,7 +103,7 @@ int				extract_file(t_command *command, char **str,
 	return (1);
 }
 
-int				get_cmd(t_command *command, char *str, t_hash_map *env)
+int	get_cmd(t_command *command, char *str, t_hash_map *env)
 {
 	t_var_bag	bag;
 

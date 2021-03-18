@@ -6,7 +6,7 @@
 /*   By: htagrour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 19:35:44 by htagrour          #+#    #+#             */
-/*   Updated: 2019/10/20 13:52:04 by htagrour         ###   ########.fr       */
+/*   Updated: 2021/03/18 10:28:55 by fsarbout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 char 	*ft_add_char(const char *str, char c)
 {
-	int i;
-	char *tab;
+	int		i;
+	char	*tab;
 
 	i = ft_strlen(str);
 	tab = malloc(sizeof(char) * i + 2);
 	if (!tab)
-		return NULL;
+		return (NULL);
 	ft_strlcpy(tab, str, i + 1);
 	tab[i++] = c;
 	tab[i] = 0;

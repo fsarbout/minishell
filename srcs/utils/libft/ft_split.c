@@ -6,13 +6,13 @@
 /*   By: htagrour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 00:30:20 by htagrour          #+#    #+#             */
-/*   Updated: 2019/10/22 16:43:22 by htagrour         ###   ########.fr       */
+/*   Updated: 2021/03/18 10:11:05 by fsarbout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		words_number(char const *str, char c)
+static int	words_number(char const *str, char c)
 {
 	int			i;
 	int			space_flag;
@@ -35,7 +35,7 @@ static int		words_number(char const *str, char c)
 	return (words_number);
 }
 
-static void		delet_all(char **tab, int j)
+static void	delet_all(char **tab, int j)
 {
 	while (j >= 0)
 	{
@@ -45,9 +45,9 @@ static void		delet_all(char **tab, int j)
 	free(tab);
 }
 
-static void		add_letters(int len, int pos, char const *str, char *tab)
+static void	add_letters(int len, int pos, char const *str, char *tab)
 {
-	int			k;
+	int	k;
 
 	k = 0;
 	while (k < len)
@@ -58,10 +58,10 @@ static void		add_letters(int len, int pos, char const *str, char *tab)
 	tab[k] = '\0';
 }
 
-static char		**add_words(char const *str, char **tab, char c, int i)
+static char	**add_words(char const *str, char **tab, char c, int i)
 {
-	int			len;
-	int			j;
+	int	len;
+	int	j;
 
 	j = 0;
 	while (str[i])
@@ -73,7 +73,7 @@ static char		**add_words(char const *str, char **tab, char c, int i)
 		{
 			while (str[i + len] && str[i + len] != c)
 				len++;
-			if ((tab[j] = (char*)malloc(sizeof(*tab[j]) * (len + 1))) == NULL)
+			if ((tab[j] = (char *)malloc(sizeof(*tab[j]) * (len + 1))) == NULL)
 			{
 				delet_all(tab, j);
 				return (NULL);
@@ -87,11 +87,11 @@ static char		**add_words(char const *str, char **tab, char c, int i)
 	return (tab);
 }
 
-char			**ft_split(char const *str, char c)
+char	**ft_split(char const *str, char c)
 {
-	char		**tab;
-	int			wnb;
-	int			i;
+	char	**tab;
+	int		wnb;
+	int		i;
 
 	i = 0;
 	if (!str)

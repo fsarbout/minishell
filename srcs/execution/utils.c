@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 16:28:10 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/17 15:54:51 by htagrour         ###   ########.fr       */
+/*   Updated: 2021/03/18 09:13:25 by fsarbout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,52 +14,54 @@
 
 int	ft_strchr_n(const char *s, int c)
 {
-	int j = 2;
-	
+	int	j;
+
+	j = 2;
 	while (s[j])
 	{
-        
-        if (s[j] != (char)c)
-            return (1);
+		if (s[j] != (char)c)
+			return (1);
 		j++;
 	}
-    return (0);
+	return (0);
 }
 
 int	ft_strchr_eql(const char *s, int c)
 {
-	int j = 0;
-	
+	int	j;
+
+	j = 0;
 	while (s[j])
 	{
-        if (s[j] == (char)c)
-            return (j);
+		if (s[j] == (char)c)
+			return (j);
 		j++;
 	}
-    return (j);
+	return (j);
 }
 
 void	echo_check_n(char **args, int *flag)
-{ 
-    int i = array_lenght(args);
+{
+	int	i;
 
-    while (i > 0)
-    {
-	    if (!strncmp(*args, "-n", 2))
-        {
-            if (!ft_strchr_n(*args, 'n'))
-                *flag += 1;
-            else
-                break;
-        }
-        else
-            break;
-        args++;
-        i--;
-    }
+	i = array_lenght(args);
+	while (i > 0)
+	{
+		if (!strncmp(*args, "-n", 2))
+		{
+			if (!ft_strchr_n(*args, 'n'))
+				*flag += 1;
+			else
+				break ;
+		}
+		else
+			break ;
+		args++;
+		i--;
+	}
 }
 
-int		array_lenght(char **str)
+int	array_lenght(char **str)
 {
 	int	n;
 
@@ -67,4 +69,13 @@ int		array_lenght(char **str)
 	while (str[n])
 		n++;
 	return (n);
+}
+
+void	add_return(t_hash_map *env, int ret)
+{
+	char	*temp;
+
+	temp = ft_itoa(ret);
+	set_value("?", temp, env);
+	free(temp);
 }

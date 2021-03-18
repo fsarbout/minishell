@@ -6,15 +6,15 @@
 /*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 21:52:32 by htagrour          #+#    #+#             */
-/*   Updated: 2021/03/17 17:54:03 by htagrour         ###   ########.fr       */
+/*   Updated: 2021/03/18 09:59:59 by fsarbout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int			isthereaback(char *str)
+int	isthereaback(char *str)
 {
-	int		index;
+	int	index;
 
 	index = 0;
 	while (str[index])
@@ -26,14 +26,14 @@ int			isthereaback(char *str)
 	return (0);
 }
 
-int			free_(char **str)
+int	free_(char **str)
 {
 	free(*str);
 	*str = NULL;
 	return (0);
 }
 
-int			add_line(char **str, int fd)
+int	add_line(char **str, int fd)
 {
 	char	*tem;
 	int		i;
@@ -42,8 +42,8 @@ int			add_line(char **str, int fd)
 	i = 1;
 	while (i > 0)
 	{
-		if (!(tem = (char*)malloc(sizeof(char) * BUFFER_SIZE + 1)) ||
-		(i = read(fd, tem, BUFFER_SIZE)) == -1)
+		if (!(tem = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1))
+			 || (i = read(fd, tem, BUFFER_SIZE)) == -1)
 			return (-1);
 		tem[i] = '\0';
 		ptr = *str;
@@ -59,12 +59,12 @@ int			add_line(char **str, int fd)
 	return (i);
 }
 
-int			get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line)
 {
-	static char		*rest;
-	int				counter;
-	int				read_value;
-	char			*ptr;
+	static char	*rest;
+	int			counter;
+	int			read_value;
+	char		*ptr;
 
 	counter = 0;
 	if (!line || read(fd, NULL, 0) != 0 || BUFFER_SIZE < 0)
@@ -78,7 +78,7 @@ int			get_next_line(int fd, char **line)
 		counter++;
 	if (!(*line = ft_substr(rest, 0, counter)))
 		return (-1);
-	if (rest[counter]!= '\n' && !read_value)
+	if (rest[counter] != '\n' && !read_value)
 		return (free_(&rest));
 	ptr = rest;
 	if (!(rest = ft_strdup(rest + counter + 1)))
