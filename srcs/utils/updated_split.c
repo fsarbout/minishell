@@ -3,14 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   updated_split.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
+/*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 00:30:20 by htagrour          #+#    #+#             */
-/*   Updated: 2021/03/18 12:20:56 by fsarbout         ###   ########.fr       */
+/*   Updated: 2021/03/19 18:49:30 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+int	check_condition(char c, t_var_bag *bag, int *wn, int *del_flag)
+{
+	if (c == bag->del && !bag->brack_flag && !bag->slash_flag)
+	{
+		if (*del_flag)
+			return (-1);
+		*del_flag = 1;
+	}
+	else
+	{
+		*wn += *del_flag;
+		*del_flag = 0;
+	}
+	adjust_var_bag(bag, c);
+	return (0);
+}
 
 static int	get_word_number(char const *str, char del, int *wn)
 {
@@ -20,6 +37,7 @@ static int	get_word_number(char const *str, char del, int *wn)
 	ft_bzero(&bag, sizeof(bag));
 	*wn = 0;
 	del_flag = 1;
+	bag.del = del;
 	while (*str)
 	{
 		while (*str == ' ' && !bag.brack_flag)
@@ -29,24 +47,41 @@ static int	get_word_number(char const *str, char del, int *wn)
 		}
 		if (*str)
 		{
-			if (*str == del && !bag.brack_flag && !bag.slash_flag)
-			{
-				if (del_flag)
-					return (-1);
-				del_flag = 1;
-			}
-			else
-			{
-				*wn += del_flag;
-				del_flag = 0;
-			}
-			adjust_var_bag(&bag, *str);
+			if (check_condition(*str, &bag, wn, &del_flag) == -1)
+				return (-1);
 			str++;
 		}
 	}
 	if (bag.brack_flag || (del_flag && del == '|') || bag.slash_flag)
 		return (-1);
 	return (*wn);
+}
+
+int	add_token(const char *str, char **tab, t_var_bag *bag)
+{
+	int	j;
+	int	len;
+
+	j = 0;
+	while (*str != '\0')
+	{
+		len = 0;
+		while (*str == bag->del)
+			str++;
+		if (*str)
+		{
+			while (*(str + len) && !(*(str + len) == bag->del
+						 && !bag->brack_flag && !bag->slash_flag))
+			{
+				adjust_var_bag(bag, *(str + len));
+				len++;
+			}
+			tab[j] = ft_substr(str, 0, len);
+			j++;
+			str += (len);
+		}
+	}
+	return (j);
 }
 
 static char	**get_tokens(const char *str, int wnb, int del)
@@ -57,27 +92,11 @@ static char	**get_tokens(const char *str, int wnb, int del)
 	t_var_bag	bag;
 
 	ft_bzero(&bag, sizeof(bag));
-	j = 0;
-	if (!(tab = malloc(sizeof(char *) * (wnb + 1))))
+	bag.del = del;
+	tab = malloc(sizeof(char *) * (wnb + 1));
+	if (!tab)
 		return (NULL);
-	while (*str != '\0')
-	{
-		len = 0;
-		while (*str == del)
-			str++;
-		if (*str)
-		{
-			while (*(str + len) && !(*(str + len) == del
-						 && !bag.brack_flag && !bag.slash_flag))
-			{
-				adjust_var_bag(&bag, *(str + len));
-				len++;
-			}
-			tab[j] = ft_substr(str, 0, len);
-			j++;
-			str += (len);
-		}
-	}
+	j = add_token(str, tab, &bag);
 	tab[j] = NULL;
 	return (tab);
 }

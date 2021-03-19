@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
+/*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 22:24:08 by htagrour          #+#    #+#             */
-/*   Updated: 2021/03/13 16:45:48 by fsarbout         ###   ########.fr       */
+/*   Updated: 2021/03/19 18:51:24 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-#define BUFFER_SIZE 1
+# define BUFFER_SIZE 1
 
 size_t				ft_strlen(const char *s);
 char				*ft_strjoin(char const *s1, char const *s2);

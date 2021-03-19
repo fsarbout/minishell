@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hash_table.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
+/*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 10:32:50 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/18 12:16:16 by fsarbout         ###   ########.fr       */
+/*   Updated: 2021/03/19 18:58:59 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ t_listo	*new_item(const char *key, const char *value)
 {
 	t_listo	*item;
 
-	if (!(item = malloc(sizeof(t_listo))))
+	item = malloc(sizeof(t_listo));
+	if (!item)
 		return (NULL);
 	item->key = ft_strdup(key);
 	item->value = ft_strdup(value);
@@ -25,8 +26,8 @@ t_listo	*new_item(const char *key, const char *value)
 	return (item);
 }
 
-void	add_new_key(const char *key, const char *value
-		 , t_hash_map *hm, int alone)
+void	add_new_key(const char *key, const char *value,
+	t_hash_map *hm, int alone)
 {
 	t_listo	*item;
 

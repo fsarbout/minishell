@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: htagrour <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 00:30:20 by htagrour          #+#    #+#             */
-/*   Updated: 2021/03/18 10:11:05 by fsarbout         ###   ########.fr       */
+/*   Updated: 2021/03/19 19:09:36 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,7 @@ static char	**add_words(char const *str, char **tab, char c, int i)
 		{
 			while (str[i + len] && str[i + len] != c)
 				len++;
-			if ((tab[j] = (char *)malloc(sizeof(*tab[j]) * (len + 1))) == NULL)
-			{
-				delet_all(tab, j);
-				return (NULL);
-			}
+			tab[j] = (char *)malloc(sizeof(*tab[j]) * (len + 1));
 			add_letters(len, i, str, tab[j]);
 			j++;
 			i += len;

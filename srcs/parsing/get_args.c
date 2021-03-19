@@ -6,13 +6,13 @@
 /*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 16:28:32 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/18 12:22:59 by fsarbout         ###   ########.fr       */
+/*   Updated: 2021/03/19 17:10:44 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	get_argument(char **str, char **ptr, t_var_bag *bag, t_hash_map *env)
+int	get_argument(char **str, char **ptr, t_var_bag *bag, t_hash_map *env)
 {
 	char	*temp;
 	int		len;
@@ -22,7 +22,7 @@ void	get_argument(char **str, char **ptr, t_var_bag *bag, t_hash_map *env)
 	{
 		temp = *ptr;
 		if (**str != '$' || (bag->brack_flag && bag->spec_char == '\'')
-					|| (**str == '$' && (belong("<>'\" |", *(*str + 1))
+			|| (**str == '$' && (belong("<>'\" |", *(*str + 1))
 						|| !*(*str + 1))))
 			*ptr = ft_add_char(*ptr, **str);
 		else
@@ -38,17 +38,24 @@ void	get_argument(char **str, char **ptr, t_var_bag *bag, t_hash_map *env)
 		free(temp);
 	}
 	adjust_var_bag(bag, **str);
-	*str += (len) ? len : 1;
+	return (len);
 }
 
 int	extract_arg(t_command *command, char **str, t_var_bag *bag, t_hash_map *env)
 {
 	char	*arg;
+	int		len;
 
 	arg = ft_strdup("");
 	while (**str && !((**str == ' ' || (is_red(**str)
 					   	 && !bag->slash_flag)) && !bag->brack_flag))
-		get_argument(str, &arg, bag, env);
+	{
+		len = get_argument(str, &arg, bag, env);
+		if (len)
+			*str += len;
+		else
+			*str += 1;
+	}
 	ft_lstadd_back(&(command->args), ft_lstnew((void*)arg));
 	return (1);
 }

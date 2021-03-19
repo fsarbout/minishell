@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: htagrour <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 14:55:21 by htagrour          #+#    #+#             */
-/*   Updated: 2021/03/18 10:22:44 by fsarbout         ###   ########.fr       */
+/*   Updated: 2021/03/19 19:08:56 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ int	number_digit(int n)
 
 char	*ft_itoa(int n)
 {
-	int			len;
-	char		*tab;
-	unsigned	a;
+	int				len;
+	char			*tab;
+	unsigned int	a;
 
 	if (n <= 0)
 	{
@@ -35,8 +35,7 @@ char	*ft_itoa(int n)
 		len = number_digit(n);
 		a = n;
 	}
-	if (!(tab = (char *)malloc(sizeof(char) * len + 1)))
-		return (NULL);
+	tab = (char *)malloc(sizeof(char) * len + 1);
 	tab[len] = '\0';
 	while (--len >= 0)
 	{

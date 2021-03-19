@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hash_table.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
+/*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 10:39:35 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/18 10:47:53 by fsarbout         ###   ########.fr       */
+/*   Updated: 2021/03/19 19:06:22 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,6 @@ void			delet_value(const char *key, t_hash_map *hm);
 char			**hash_to_arr(t_hash_map *hm, int flag);
 char			**sorted_key(t_hash_map *hm);
 void			bubblesort(char **tab, int len);
+void			key_value(char *key, char *value, char **dist, int *i);
 
 #endif

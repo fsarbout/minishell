@@ -6,7 +6,7 @@
 /*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 16:28:42 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/18 09:37:19 by fsarbout         ###   ########.fr       */
+/*   Updated: 2021/03/19 17:32:06 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	adjust_var_bag(t_var_bag *bag, char c)
 {
-	bag->slash_flag += (c == 92) ? 1:0;
+	if (c == 92)
+		bag->slash_flag++;
 	bag->slash_flag %= 2;
 	if (bag->spec_char == '\'' && bag->brack_flag)
 		bag->slash_flag = 0;
@@ -59,7 +60,7 @@ int	conditions(char c, t_var_bag bag, char n)
 	{
 		if (bag.brack_flag && bag.spec_char == '"')
 		{
-			if (belong("$\"\\", n))
+			if (belong("$\"\\", n) && !bag.slash_flag)
 				return (1);
 		}
 		else if (!bag.slash_flag)

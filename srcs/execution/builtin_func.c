@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_func.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
+/*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 16:27:45 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/18 09:03:22 by fsarbout         ###   ########.fr       */
+/*   Updated: 2021/03/19 17:43:30 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,13 @@ int	built_in1(t_command command, t_hash_map *env, int flag)
 
 	out_fd = STDOUT_FILENO;
 	cmd = (char*)command.args->content;
-	if (cmd && (res = is_buitin1(cmd)) == -1)
-		return (-1);
+	
+	if (cmd)
+	{
+		res = is_buitin1(cmd);
+		if (res == -1)
+			return (-1);
+	}
 	if (flag)
 		if (get_in_fd(command, &out_fd) || get_out_fd(command, &out_fd))
 			return (print_error("FIle ERROR", 1, env));

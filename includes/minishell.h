@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
+/*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 11:27:20 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/18 11:40:54 by fsarbout         ###   ########.fr       */
+/*   Updated: 2021/03/19 15:54:02 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,13 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <errno.h>
-#include <wait.h>
 # include <signal.h>
 # include "macros.h"
 # include "structs.h"
 # include "functions.h"
+
+#if __LINUX
+# include <wait.h>
+#endif
 
 #endif

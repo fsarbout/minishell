@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   functions.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
+/*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 16:17:26 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/18 12:14:19 by fsarbout         ###   ########.fr       */
+/*   Updated: 2021/03/19 18:13:38 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,4 @@ int			is_built_in(char *str);
 void		get_external_env(char **envs, t_hash_map *env);
 void		ignore_signals(void);
 void		print_shell(void);
-
 #endif

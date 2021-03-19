@@ -3,28 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
+/*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 16:27:58 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/18 10:58:47 by fsarbout         ###   ########.fr       */
+/*   Updated: 2021/03/19 18:00:16 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	*get_bin(char *cmd, struct stat st, t_hash_map *env)
+char	*get_bin(char *cmd, struct stat st, t_hash_map *env, int i)
 {
 	char	*temp1;
 	char	**temp;
 	char	*path;
-	int		i;
 
 	path = get_value("PATH", env);
 	if (path[0])
 	{
 		temp = ft_split(path, ':');
 		free(path);
-		i = -1;
 		while (temp[++i])
 		{
 			temp1 = temp[i];
@@ -44,8 +42,8 @@ char	*get_bin(char *cmd, struct stat st, t_hash_map *env)
 
 int	get_full_path(t_command *command, t_hash_map *env)
 {
-	char	*cmd;
-	char	*bin;
+	char		*cmd;
+	char		*bin;
 	struct stat	st;
 
 	if (!command->args)
@@ -53,9 +51,12 @@ int	get_full_path(t_command *command, t_hash_map *env)
 	cmd = (char *)command->args->content;
 	if (!cmd[0])
 		return (127);
-	if (is_built_in(cmd) || (!stat(cmd, &st) && !S_ISDIR(st.st_mode)&& (st.st_mode & S_IXUSR)))
+	if (is_built_in(cmd))
 		return (0);
-	if (!(bin = get_bin(cmd, st, env)))
+	if (!stat(cmd, &st) && !S_ISDIR(st.st_mode) && (st.st_mode & S_IXUSR))
+		return (0);
+	bin = get_bin(cmd, st, env, -1);
+	if (!bin)
 		return (127);
 	free(command->args->content);
 	command->args->content = (void *)ft_strdup(bin);
@@ -74,7 +75,8 @@ int	get_in_fd(t_command command, int *last_fd)
 	while (temp)
 	{
 		red = (t_redx*)temp->content;
-		if ((fd = open(red->file, O_RDONLY)) < 0)
+		fd = open(red->file, O_RDONLY);
+		if (fd < 0)
 			return (-1);
 		if (*last_fd)
 			close(*last_fd);

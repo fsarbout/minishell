@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+         #
+#    By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/22 16:29:25 by htagrour          #+#    #+#              #
-#    Updated: 2021/03/13 17:04:41 by fsarbout         ###   ########.fr        #
+#    Updated: 2021/03/19 18:22:37 by htagrour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,6 @@ BSRC = ft_lstsize_bonus.c\
 	   ft_lstnew_bonus.c\
 	   ft_lstclear_bonus.c\
 	   ft_lstiter_bonus.c\
-	   ft_lstmap_bonus.c
 
 
 OBJECT = ft_strlen.o\
@@ -101,7 +100,6 @@ BOBJET = ft_lstadd_back_bonus.o\
 		 ft_lstsize_bonus.o\
 		 ft_lstclear_bonus.o\
 		 ft_lstiter_bonus.o\
-		 ft_lstmap_bonus.o
 
 INCLUDES=./
 

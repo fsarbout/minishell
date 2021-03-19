@@ -6,7 +6,7 @@
 /*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 16:16:06 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/18 11:39:48 by fsarbout         ###   ########.fr       */
+/*   Updated: 2021/03/19 18:38:30 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 typedef struct s_var_bag
 {
 	int		brack_flag;
-	char	prev_char;
+	char	del;
 	char	spec_char;
 	int		slash_flag;
 }				t_var_bag;

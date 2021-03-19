@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
+/*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 09:06:05 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/18 12:18:36 by fsarbout         ###   ########.fr       */
+/*   Updated: 2021/03/19 18:13:28 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,11 @@ void	sig_default_mode(void)
 	signal(SIGQUIT, SIG_DFL);
 }
 
-void	connect_pipes(t_command command, int last_fd, int fds[])
+void	exec_(t_command command, int last_fd, int fds[], t_hash_map *env)
 {
+	char	**envs;
+	char	**args;
+	
 	dup2(last_fd, 0);
 	if (last_fd != 0)
 		close(last_fd);
@@ -27,16 +30,22 @@ void	connect_pipes(t_command command, int last_fd, int fds[])
 		dup2(fds[1], 1);
 	close(fds[0]);
 	close(fds[1]);
+	envs = hash_to_arr(env, 0);
+	args = list_to_array(command.args);
+	if (built_in1(command, env, 0) == -1 && built_in2(args, env) == -1)
+		execve(*args, args, envs);
+	else
+		exit(EXIT_SUCCESS);
+	exit(EXIT_FAILURE);
 }
 
 int	start_process(t_command command, int last_fd, int fds[], t_hash_map *env)
 {
-	char	**envs;
-	char	**args;
 	pid_t	pid;
 
 	g_flag = 1;
-	if ((pid = fork()) == -1)
+	pid = fork();
+	if (pid == -1)
 		exit(1);
 	if (!pid)
 	{
@@ -47,14 +56,7 @@ int	start_process(t_command command, int last_fd, int fds[], t_hash_map *env)
 			exit(0);
 		if (get_full_path(&command, env))
 			exit(print_error("command not found", 127, env));
-		connect_pipes(command, last_fd, fds);
-		envs = hash_to_arr(env, 0);
-		args = list_to_array(command.args);
-		if (built_in1(command, env, 0) == -1 && built_in2(args, env) == -1)
-			execve(*args, args, envs);
-		else
-			exit(EXIT_SUCCESS);
-		exit(EXIT_FAILURE);
+		exec_(command, last_fd, fds, env);
 	}
 	close(fds[1]);
 	return (pid);

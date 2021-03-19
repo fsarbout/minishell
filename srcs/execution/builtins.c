@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
+/*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 08:54:07 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/18 09:05:22 by fsarbout         ###   ########.fr       */
+/*   Updated: 2021/03/19 18:20:25 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,13 @@ int	exit_(t_command cmd, t_hash_map *env)
 	temp = cmd.args->next;
 	if (!temp)
 		exit(ft_atoi(get_value("?", env)));
-	if (temp->next)
-		return (print_error("exit: too many arguments", 1, env));
 	if (!is_valide_exit((char *)temp->content))
 		exit(print_error("exit: numeric argument required", 255, env));
+	if (temp->next)
+		return (print_error("exit: too many arguments", 1, env));
 	exit(ft_atoi((char*)temp->content));
 	return (0);
 }
-
-	/* 
-	 	** echo '' >file \" >foile2 echo souad "hana"souad
-		**echo "" "" '' '' '' "" '' "" hamza|cat -e
-	*/
 
 int	echo(char **args)
 {
@@ -99,14 +94,15 @@ int	export(t_command command, t_hash_map *env, int out_fd)
 {
 	char	**str;
 	t_list	*temp;
-
+	int		ret;
+	
 	temp = command.args->next;
 	if (!temp)
 		return (print_env(env, out_fd));
 	while (temp)
 	{
-		add_env((char *)temp->content, env);
+		ret = add_env((char *)temp->content, env);
 		temp = temp->next;
 	}
-	return (0);
+	return (ret);
 }

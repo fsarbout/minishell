@@ -6,7 +6,7 @@
 /*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 21:52:32 by htagrour          #+#    #+#             */
-/*   Updated: 2021/03/18 09:59:59 by fsarbout         ###   ########.fr       */
+/*   Updated: 2021/03/19 18:56:20 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,14 @@ int	add_line(char **str, int fd)
 	i = 1;
 	while (i > 0)
 	{
-		if (!(tem = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1))
-			 || (i = read(fd, tem, BUFFER_SIZE)) == -1)
+		tem = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
+		i = read(fd, tem, BUFFER_SIZE);
+		if (i == -1)
 			return (-1);
 		tem[i] = '\0';
 		ptr = *str;
-		if (!(*str = ft_strjoin(*str, tem)))
+		*str = ft_strjoin(*str, tem);
+		if (!*str)
 			return (-1);
 		free_(&ptr);
 		free_(&tem);
@@ -67,21 +69,21 @@ int	get_next_line(int fd, char **line)
 	char		*ptr;
 
 	counter = 0;
-	if (!line || read(fd, NULL, 0) != 0 || BUFFER_SIZE < 0)
-		return (-1);
 	if (!rest)
-		if (!(rest = ft_strdup("")))
-			return (-1);
-	if ((read_value = add_line(&rest, fd)) == -1)
+		rest = ft_strdup("");
+	read_value = add_line(&rest, fd);
+	if (read_value == -1)
 		return (-1);
 	while (rest[counter] != '\n' && rest[counter])
 		counter++;
-	if (!(*line = ft_substr(rest, 0, counter)))
+	*line = ft_substr(rest, 0, counter);
+	if (!*line)
 		return (-1);
 	if (rest[counter] != '\n' && !read_value)
 		return (free_(&rest));
 	ptr = rest;
-	if (!(rest = ft_strdup(rest + counter + 1)))
+	rest = ft_strdup(rest + counter + 1);
+	if (!rest)
 		return (-1);
 	free_(&ptr);
 	return (1);

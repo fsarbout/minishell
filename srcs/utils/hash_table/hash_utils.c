@@ -3,31 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   hash_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
+/*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 10:33:00 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/18 10:51:59 by fsarbout         ###   ########.fr       */
+/*   Updated: 2021/03/19 19:05:46 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "hash_table.h"
-
-void	key_value(char *key, char *value, char **dist, int *i)
-{
-	char	*temp;
-
-	if (value)
-	{
-		temp = ft_strjoin(key, "=");
-		*dist = ft_strjoin(temp, value);
-		free(temp);
-		*i = *i + 1;
-	}
-}
-/*
-   if flag == 1 this function will retun array of key
-   else will retunr array of key=value
-   */
 
 char	**hash_to_arr(t_hash_map *hm, int flag)
 {
@@ -39,8 +22,6 @@ char	**hash_to_arr(t_hash_map *hm, int flag)
 	i = 0;
 	size = hm->size;
 	tab = malloc(sizeof(char*) * (hm->elem_total + 1));
-	if (!tab)
-		return (NULL);
 	while (--size >= 0)
 	{
 		temp = hm->item[size];
@@ -111,7 +92,8 @@ t_hash_map	*init_hash_map(int size)
 {
 	t_hash_map	*hm;
 
-	if (!(hm = malloc(sizeof(t_hash_map))))
+	hm = malloc(sizeof(t_hash_map));
+	if (!hm)
 		return (NULL);
 	hm->item = malloc(sizeof(t_listo*) * size);
 	if (hm->item == NULL)
