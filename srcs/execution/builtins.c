@@ -6,7 +6,7 @@
 /*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 08:54:07 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/19 18:20:25 by htagrour         ###   ########.fr       */
+/*   Updated: 2021/03/19 19:15:37 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	export(t_command command, t_hash_map *env, int out_fd)
 	char	**str;
 	t_list	*temp;
 	int		ret;
-	
+
 	temp = command.args->next;
 	if (!temp)
 		return (print_env(env, out_fd));

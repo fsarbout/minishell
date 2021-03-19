@@ -6,7 +6,7 @@
 /*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 09:06:05 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/19 18:13:28 by htagrour         ###   ########.fr       */
+/*   Updated: 2021/03/19 19:14:58 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	exec_(t_command command, int last_fd, int fds[], t_hash_map *env)
 {
 	char	**envs;
 	char	**args;
-	
+
 	dup2(last_fd, 0);
 	if (last_fd != 0)
 		close(last_fd);

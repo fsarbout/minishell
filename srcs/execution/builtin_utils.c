@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
+/*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 08:56:43 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/18 09:03:52 by fsarbout         ###   ########.fr       */
+/*   Updated: 2021/03/19 19:20:51 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,16 @@ int	add_env(char *str, t_hash_map *env)
 	return (0);
 }
 
+/*
+	check for spec char
+*/
+
 int	print_env(t_hash_map *env, int out_fd)
 {
 	char	*value;
 	int		i;
 	char	**keys;
-	
+
 	i = 0;
 	keys = sorted_key(env);
 	while (keys[i])

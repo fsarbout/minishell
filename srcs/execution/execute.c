@@ -6,7 +6,7 @@
 /*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 16:27:58 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/19 18:00:16 by htagrour         ###   ########.fr       */
+/*   Updated: 2021/03/19 19:15:11 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int	get_out_fd(t_command command, int *out_fd)
 		if (fd < 0)
 			return (-1);
 		if (*out_fd != 1)
-		close(*out_fd);
+			close(*out_fd);
 		*out_fd = fd;
 		temp = temp->next;
 	}

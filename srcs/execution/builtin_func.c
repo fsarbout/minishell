@@ -6,7 +6,7 @@
 /*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 16:27:45 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/19 17:43:30 by htagrour         ###   ########.fr       */
+/*   Updated: 2021/03/19 19:17:03 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ int	built_in1(t_command command, t_hash_map *env, int flag)
 
 	out_fd = STDOUT_FILENO;
 	cmd = (char*)command.args->content;
-	
 	if (cmd)
 	{
 		res = is_buitin1(cmd);
