@@ -51,7 +51,9 @@ int	get_full_path(t_command *command, t_hash_map *env)
 	if (!command->args)
 		return (1);
 	cmd = (char *)command->args->content;
-	if (is_built_in(cmd) || (!stat(cmd, &st) && (st.st_mode & S_IXUSR)))
+	if (!cmd[0])
+		return (127);
+	if (is_built_in(cmd) || (!stat(cmd, &st) && !S_ISDIR(st.st_mode)&& (st.st_mode & S_IXUSR)))
 		return (0);
 	if (!(bin = get_bin(cmd, st, env)))
 		return (127);
@@ -74,7 +76,8 @@ int	get_in_fd(t_command command, int *last_fd)
 		red = (t_redx*)temp->content;
 		if ((fd = open(red->file, O_RDONLY)) < 0)
 			return (-1);
-		close(*last_fd);
+		if (*last_fd)
+			close(*last_fd);
 		*last_fd = fd;
 		temp = temp->next;
 	}
@@ -98,6 +101,7 @@ int	get_out_fd(t_command command, int *out_fd)
 			fd = open(red->file, O_RDWR | O_CREAT | O_TRUNC, 0644);
 		if (fd < 0)
 			return (-1);
+		if (*out_fd != 1)
 		close(*out_fd);
 		*out_fd = fd;
 		temp = temp->next;

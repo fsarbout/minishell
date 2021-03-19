@@ -79,7 +79,7 @@ int	execute_commands(t_command *commands, int last_fd, int total
 	int	ret;
 	int	pid;
 
-	if ((total == 1) && (*commands).args && built_in1(*commands, env, 1) != -1)
+	if ((total == 1) && built_in1(*commands, env, 1) != -1)
 		return (0);
 	pipe(fds);
 	pid = start_process(*commands, last_fd, fds, env);

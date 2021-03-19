@@ -62,27 +62,27 @@ int	add_env(char *str, t_hash_map *env)
 	return (0);
 }
 
-int	print_env(t_hash_map *env)
+int	print_env(t_hash_map *env, int out_fd)
 {
 	char	*value;
 	int		i;
 	char	**keys;
-
+	
 	i = 0;
 	keys = sorted_key(env);
 	while (keys[i])
 	{
-		ft_putendl_fd("declare -x ", STDOUT_FILENO, 0);
-		ft_putendl_fd(keys[i], STDOUT_FILENO, 0);
+		ft_putendl_fd("declare -x ", out_fd, 0);
+		ft_putendl_fd(keys[i], out_fd, 0);
 		value = get_value(keys[i], env);
 		if (value)
 		{
-			ft_putendl_fd("=\"", STDOUT_FILENO, 0);
-			ft_putendl_fd(value, STDOUT_FILENO, 0);
-			ft_putchar_fd('\"', STDOUT_FILENO);
+			ft_putendl_fd("=\"", out_fd, 0);
+			ft_putendl_fd(value, out_fd, 0);
+			ft_putchar_fd('\"', out_fd);
 			free(value);
 		}
-		ft_putchar_fd('\n', STDOUT_FILENO);
+		ft_putchar_fd('\n', out_fd);
 		i++;
 	}
 	free_array((void**)keys);

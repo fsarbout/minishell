@@ -78,7 +78,7 @@ int	built_in1(t_command command, t_hash_map *env, int flag)
 	if (res == 1)
 		return (cd(command, env));
 	if (res == 2)
-		return (export(command, env));
+		return (export(command, env, out_fd));
 	if (res == 3)
 		return (unset(command, env));
 	if (res == 4)

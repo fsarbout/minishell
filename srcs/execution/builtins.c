@@ -95,14 +95,14 @@ int	unset(t_command command, t_hash_map *env)
 	return (0);
 }
 
-int	export(t_command command, t_hash_map *env)
+int	export(t_command command, t_hash_map *env, int out_fd)
 {
 	char	**str;
 	t_list	*temp;
 
 	temp = command.args->next;
 	if (!temp)
-		return (print_env(env));
+		return (print_env(env, out_fd));
 	while (temp)
 	{
 		add_env((char *)temp->content, env);

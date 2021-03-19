@@ -68,6 +68,7 @@ int	process_line(char *line, t_hash_map *env)
 		if (!(commands = get_commands(temp2, total, env)))
 			return (free_array((void**)temp1));
 		execute_commands(commands, 0, total, env);
+		g_flag = 0;
 		free_command_array(commands, total);
 	}
 	free_array((void**)temp1);
