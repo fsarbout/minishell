@@ -6,7 +6,7 @@
 /*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 11:59:17 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/19 19:14:38 by htagrour         ###   ########.fr       */
+/*   Updated: 2021/03/27 18:38:43 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,15 @@
 
 void	sig_handler(int sig)
 {
-	ft_putstr_fd("\b\b  \b\b", STDOUT_FILENO);
+	if (g_flag)
+	{
+		if (sig != SIGINT)
+			ft_putstr_fd("Quit: 3", STDOUT_FILENO);
+		ft_putchar_fd('\n', STDOUT_FILENO);
+	}
 	if (sig == SIGINT && !g_flag)
 	{
-		ft_putstr_fd("\n", STDOUT_FILENO);
+		ft_putchar_fd('\n', STDOUT_FILENO);
 		print_shell();
 	}
 }

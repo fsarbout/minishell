@@ -6,7 +6,7 @@
 /*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 11:27:20 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/19 15:54:02 by htagrour         ###   ########.fr       */
+/*   Updated: 2021/03/27 16:04:50 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,11 @@
 # include <sys/stat.h>
 # include <errno.h>
 # include <signal.h>
+#include <termios.h>
+#include <termcap.h>
 # include "macros.h"
 # include "structs.h"
 # include "functions.h"
 
-#if __LINUX
-# include <wait.h>
-#endif
 
 #endif

@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+         #
+#    By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/22 16:29:25 by htagrour          #+#    #+#              #
-#    Updated: 2021/03/18 12:02:21 by fsarbout         ###   ########.fr        #
+#    Updated: 2021/03/27 16:00:49 by htagrour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-CC = gcc -fsanitize=address -g
+CC = gcc -fsanitize=address -g -ltermcap
 
 CFLAGS = -Wall -Wextra -Werror
 

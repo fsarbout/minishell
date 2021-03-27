@@ -7,13 +7,25 @@ int	main (int argc, char *argv[], char **envs)
 	int			i;
 
 	i = 1;
+	    int     ret;
+    char    buff;
+    char    *term_name;
+    char    *termcap;
+    struct termios  termios_new;
+    struct termios  termios_backup;
+
+    term_name = getenv("TERM");
+    tgetent(NULL, term_name);
 	env = init_hash_map(30);
 	get_external_env(envs, env);
 	ignore_signals();
+	int fd = open("test.c", O_RDONLY);
 	while (i > 0)
 	{
 		print_shell();
-		i = get_next_line(STDIN_FILENO, &line);
+		i = get_line(&line, STDIN_FILENO);
+		// add to hist
+		ft_putchar_fd('\n', STDOUT_FILENO);
 		if (line[0])
 			process_line(line, env);
 		free(line);
@@ -53,6 +65,6 @@ int	process_line(char *line, t_hash_map *env)
 void	print_shell(void)
 {
 	ft_putstr_fd(BGRN, STDOUT_FILENO);
-	ft_putstr_fd("minishell😎$", STDOUT_FILENO);
+	ft_putstr_fd("minishell😎$> ", STDIN_FILENO);
 	ft_putstr_fd(RESET, STDOUT_FILENO);
 }
