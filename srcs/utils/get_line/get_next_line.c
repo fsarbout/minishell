@@ -6,7 +6,7 @@
 /*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 21:52:32 by htagrour          #+#    #+#             */
-/*   Updated: 2021/03/27 16:08:40 by htagrour         ###   ########.fr       */
+/*   Updated: 2021/03/28 15:00:41 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ int	add_line(char **str, int fd)
 		free_(&tem);
 		if (isthereaback(*str))
 			break ;
-		if (**str)
-			i = 1;
+		// if (**str)
+		// 	i = 1;
 	}
 	return (i);
 }

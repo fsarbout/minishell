@@ -6,7 +6,7 @@
 /*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 16:28:32 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/19 17:10:44 by htagrour         ###   ########.fr       */
+/*   Updated: 2021/03/28 15:25:36 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,10 @@ int	extract_arg(t_command *command, char **str, t_var_bag *bag, t_hash_map *env)
 	return (1);
 }
 
-t_redx	*get_file(char **str, t_var_bag *bag, t_hash_map *env)
+t_redx	*get_file(char **str, t_var_bag *bag, int len,t_hash_map *env)
 {
 	t_redx	*red;
-
-	(*str)++;
+	
 	while (**str && **str == ' ')
 		(*str)++;
 	if (is_red(**str))
@@ -74,7 +73,13 @@ t_redx	*get_file(char **str, t_var_bag *bag, t_hash_map *env)
 		return (NULL);
 	red->file = ft_strdup("");
 	while (**str && !((is_red(**str) || **str == ' ') && !bag->brack_flag))
-		get_argument(str, &red->file, bag, env);
+	{
+		len = get_argument(str, &red->file, bag, env);
+		if (len)
+			*str += len;
+		else
+			*str += 1;
+	}
 	if (!red->file[0])
 	{
 		free(red->file);
@@ -100,7 +105,8 @@ int	extract_file(t_command *command, char **str
 		double_red = 1;
 		(*str)++;
 	}
-	red = get_file(str, bag, env);
+	*str += 1;
+	red = get_file(str, bag, 0,env);
 	if (!red)
 		return (-1);
 	red->type = double_red;
