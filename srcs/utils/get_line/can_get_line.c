@@ -19,7 +19,6 @@ int ft_get_char(int *c, int fd)
     struct termios  termios_new;
     struct termios  termios_backup;
     
-
     ft_bzero(&termios_new, sizeof(struct termios));
     tcgetattr(STDIN_FILENO, &termios_backup);
     termios_new = termios_backup;
@@ -36,60 +35,59 @@ int ft_get_char(int *c, int fd)
     return (i);
 }
 
-/*
-    add delete button
-    add historique
-*/
-
-int delete()
+void arrow_up(t_list **hist)
 {
 
-    return (0);
+    if (*hist)
+    {
+        write(1,"\r", 1);
+        tputs(tgetstr("ce", NULL), 1,put_char);
+        print_shell();
+        if ((*hist)->content)
+            ft_putendl_fd((char*)(*hist)->content, STDOUT_FILENO,0);
+        if ((*hist)->next)
+            *hist = (*hist)->next;
+    }
 }
-int arrow_up()
+
+void arrow_down(t_list **hist)
 {
-    return (0);
+    if (*hist)
+    {
+        print_shell();
+        if ((*hist)->content)
+            ft_putendl_fd((char*)(*hist)->content, STDOUT_FILENO,0);
+        if ((*hist)->prev)
+            *hist = (*hist)->prev;
+    }
 }
-int arrow_down()
-{
-    return (0);
-}
+
 
 int get_line(char **line, int fd, t_list *hist)
 {
     int c;
     t_list *current;
     t_list *tem;
+    int i;
 
-    int i = 1;
-    char *temp;
-
-    /*
-        current = hist + case;
-    */
     current = NULL;
-    current->next->content = ft_strdup("");
-    while (i > 0)
+    while (1)
     {
         i = ft_get_char(&c, fd);
         if (c == '\n')
-            return (1);
-
+            break;
         if (c >= 32 && c < 127)
-        {
-            temp = *line;
-            *line = ft_add_char(*line, c);
-            ft_putchar_fd(c, STDOUT_FILENO);
-            free(temp);
-            //add to current
-        }
-
+            ft_lstadd_front(&current, ft_lstnew(all_char(c)));
         if (c == CTR_D && !**line)
             i = 0;
         if (c == ARROW_UP)
-            ft_putchar_fd('2', STDOUT_FILENO);
-        /*temp = current */
+            arrow_up(&hist);
+        if (c == ARROW_DOWN)
+            arrow_down(&hist);
+        if (c == DELETE)
+            ft_lstdelone(&current, free);
+        refresh(current);
     }
-    
+    ft_lstclear(&current, free);
     return (i);
 }

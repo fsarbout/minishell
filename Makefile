@@ -6,7 +6,7 @@
 #    By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/22 16:29:25 by htagrour          #+#    #+#              #
-#    Updated: 2021/03/27 16:00:49 by htagrour         ###   ########.fr        #
+#    Updated: 2021/03/29 19:07:03 by htagrour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRC = 	srcs/utils/get_line/*.c\
 		srcs/utils/*.c\
 		srcs/parsing/*.c\
 		srcs/execution/*.c\
+		test.c\
 		main.c\
 		utils.c
 
