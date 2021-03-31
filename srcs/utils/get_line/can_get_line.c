@@ -113,7 +113,7 @@ int get_line(char **line, int fd, t_list **hist)
             refresh(temp);
         }
     }
-    if (temp)
+    if (temp->content)
         *line = ft_strdup((char*)temp->content);
     else
         *line = ft_strdup("");
