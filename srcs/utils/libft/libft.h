@@ -6,7 +6,7 @@
 /*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 10:01:07 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/29 18:46:49 by htagrour         ###   ########.fr       */
+/*   Updated: 2021/03/31 17:54:42 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 	struct s_list	*prev;
+	
 }				t_list;
 
 int				ft_memcmp(const	void *s1, const void *s2, size_t n);
@@ -58,6 +59,7 @@ void			ft_putendl_fd(char *s, int fd, int newlinw);
 void			ft_putnbr_fd(int nb, int fd);
 char			*ft_strtrim(char const *s1, char const *set);
 char			*ft_add_char(const char *str, char c);
+char 			*ft_del_char(const char *str);
 t_list			*ft_lstnew(void *content);
 void			ft_lstadd_front(t_list **alst, t_list *new);
 int				ft_lstsize(t_list *list);
@@ -67,5 +69,6 @@ void			ft_lstdelone(t_list **list, void (*del)(void*));
 void			ft_lstiter(t_list *list, void (*f)(void*), int dir);
 t_list			*ft_lstmap(t_list *list, void *(*f)(void*), void (*del)(void*));
 void			ft_lstclear(t_list **lst, void (*del)(void*));
+t_list			*copy_list(t_list *lst);
 
 #endif

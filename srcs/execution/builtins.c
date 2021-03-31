@@ -6,7 +6,7 @@
 /*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 08:54:07 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/19 19:15:37 by htagrour         ###   ########.fr       */
+/*   Updated: 2021/03/31 18:56:11 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int	exit_(t_command cmd, t_hash_map *env)
 	t_list	*temp;
 	int		exit_number;
 
+	if (!cmd.next)
+	ft_putendl_fd("exit", STDOUT_FILENO, 1);
 	temp = cmd.args->next;
 	if (!temp)
 		exit(ft_atoi(get_value("?", env)));

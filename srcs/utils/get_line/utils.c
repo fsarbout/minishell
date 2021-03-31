@@ -26,8 +26,17 @@ void just_print(void *content)
 
 void refresh(t_list *current)
 {
+    char *temp;
+
+    temp = (char*) current->content;
+    if (temp)
+    {
         write(1,"\r", 1);
         tputs(tgetstr("ce", NULL), 1,put_char);
-        print_shell();
-        ft_lstiter(current, just_print, 0);
+        if (ft_strlen(temp) + 12 >= tgetnum("co"))
+            ft_putchar_fd('\n', STDIN_FILENO);
+        else
+            print_shell();
+        ft_putstr_fd(temp, STDOUT_FILENO);
+    }
 }
