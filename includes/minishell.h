@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
+/*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 11:27:20 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/04/01 15:04:38 by fsarbout         ###   ########.fr       */
+/*   Updated: 2021/04/01 18:04:07 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,13 @@ typedef struct s_command
 	t_list	*in_redx;
 	t_list	*out_redx;
 }				t_command;
+typedef struct s_var
+{
+	t_list *current;
+	int	flag;
+} t_var;
 
-int	g_flag;
-
-
+t_var 		g_var;
 char		**updated_split(char const *str, char del, int *ele_number);
 int			process_line(char *line, t_hash_map *hm);
 int			free_array(void **array);

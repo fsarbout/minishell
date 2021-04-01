@@ -6,7 +6,7 @@
 /*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 09:06:05 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/28 16:15:47 by htagrour         ###   ########.fr       */
+/*   Updated: 2021/04/01 18:11:04 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	start_process(t_command command, int last_fd, int fds[], t_hash_map *env)
 {
 	pid_t	pid;
 
-	g_flag = 1;
+	g_var.flag = 1;
 	pid = fork();
 	if (pid == -1)
 		exit(1);

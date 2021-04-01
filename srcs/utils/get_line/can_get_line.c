@@ -43,18 +43,6 @@ void get_hist(t_list **temp, int flag)
         *temp = (*temp)->prev;
 }
 
-// void arrow_down(t_list **hist)
-// {
-//     if (*hist)
-//     {
-//         print_shell();
-//         if ((*hist)->content)
-//             ft_putendl_fd((char*)(*hist)->content, STDOUT_FILENO,0);
-//         if ((*hist)->prev)
-//             *hist = (*hist)->prev;
-//     }
-// }
-
 void change_current(t_list**current, int c, int flag)
 {
     char **str;
@@ -86,13 +74,10 @@ void change_current(t_list**current, int c, int flag)
 int get_line(char **line, int fd, t_list **hist)
 {
     int c;
-    t_list *current;
-    t_list *temp;
     int i;
 
-    temp = copy_list(*hist);
-    // temp = *hist;
-    ft_lstadd_front(&temp, ft_lstnew(ft_strdup("")));
+    g_var.current = copy_list(*hist);
+    ft_lstadd_front(&g_var.current, ft_lstnew(ft_strdup("")));
     while (1)
     {
         i = ft_get_char(&c, fd);
@@ -101,22 +86,22 @@ int get_line(char **line, int fd, t_list **hist)
             if (c == '\n')
                 break;
             if (c >= 32 && c < 127)
-                change_current(&temp, c, 1);
-            if (c == CTR_D && !*(char*)temp->content)
+                change_current(&g_var.current, c, 1);
+            if (c == CTR_D && !*(char*)g_var.current->content)
                 exit (0);
             if (c == ARROW_UP)
-                get_hist(&temp, 1);
+                get_hist(&g_var.current, 1);
             if (c == ARROW_DOWN)
-                get_hist(&temp, 0);
+                get_hist(&g_var.current, 0);
             if (c == DELETE)
-                change_current(&temp, 0, 0);
-            refresh(temp);
+                change_current(&g_var.current, 0, 0);
+            refresh(g_var.current);
         }
     }
-    if (temp->content)
-        *line = ft_strdup((char*)temp->content);
+    if (g_var.current->content)
+        *line = ft_strdup((char*)g_var.current->content);
     else
         *line = ft_strdup("");
-    ft_lstclear(&temp, free);
+    ft_lstclear(&g_var.current, free);
     return (i);
 }
