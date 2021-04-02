@@ -43,7 +43,7 @@ void get_hist(t_list **current, int flag)
         *current = (*current)->prev;
 }
 
-void change_current(t_list**current, int c, int flag)
+void change_current(t_list**current, int c)
 {
     char **str;
     char *temp;
@@ -52,7 +52,7 @@ void change_current(t_list**current, int c, int flag)
     {
         str = (char **)(&(*current)->content);
         temp = *str;
-        if (flag)
+        if (c != DELETE)
             *str = ft_add_char(*str, c);
         else
             if (*str)
@@ -61,7 +61,7 @@ void change_current(t_list**current, int c, int flag)
     }
     else
     {
-        if (flag)
+        if (c != DELETE)
         {
             temp = ft_strdup(" ");
             temp[0] = c;
@@ -84,39 +84,34 @@ void adjust_hist(t_list **hist, char **line)
     }
     else
         ft_lstadd_front(hist, ft_lstnew(ft_strdup(*line)));
+    ft_lstclear(&g_var.current, free);
 }
 
 int get_line(char **line, int fd, t_list **hist)
 {
     int c;
-    int i;
     
     g_var.current = copy_list(*hist);
     ft_lstadd_front(&g_var.current, ft_lstnew(ft_strdup("")));
     print_shell();
+    tputs(tgetstr("sc", NULL), 1,put_char);
     while (1)
     {
-        i = ft_get_char(&c, fd);
+        ft_get_char(&c, fd);
         if (c >= 0 && c <= 255)
         {
             if (c == '\n')
                 break;
-            if (c >= 32 && c < 127)
-                change_current(&g_var.current, c, 1);
-            if (c == CTR_D && (!g_var.current || 
-                            !g_var.current->content ||
+            if (c >= 32 && c <= 127)
+                change_current(&g_var.current, c);
+            if (c == CTR_D && (!g_var.current || !g_var.current->content ||
                             !*(char*)g_var.current->content))
                 return (ft_lstclear(&g_var.current, free));
-            if (c == ARROW_UP)
-                get_hist(&g_var.current, 1);
-            if (c == ARROW_DOWN)
-                get_hist(&g_var.current, 0);
-            if (c == DELETE)
-                change_current(&g_var.current, 0, 0);
+            if (c == ARROW_UP || c == ARROW_DOWN)
+                get_hist(&g_var.current, c == ARROW_UP);
         }
         refresh(g_var.current);
     }
     adjust_hist(hist, line);
-    ft_lstclear(&g_var.current, free);
     return (1);
 }

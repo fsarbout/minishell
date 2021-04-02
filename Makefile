@@ -6,11 +6,11 @@
 #    By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/22 16:29:25 by htagrour          #+#    #+#              #
-#    Updated: 2021/04/02 16:30:01 by htagrour         ###   ########.fr        #
+#    Updated: 2021/04/02 19:32:52 by htagrour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = minishell -fsanitize=address
+NAME = minishell
 
 CC = gcc -g -ltermcap
 
@@ -22,7 +22,6 @@ SRC = 	srcs/utils/get_line/*.c\
 		srcs/utils/*.c\
 		srcs/parsing/*.c\
 		srcs/execution/*.c\
-		test.c\
 		main.c\
 		utils.c
 

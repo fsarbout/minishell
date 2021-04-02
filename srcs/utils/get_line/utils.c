@@ -1,44 +1,44 @@
 #include "get_next_line.h"
 
-char *all_char(int c)
-{
-    char *ptr;
-
-    ptr = malloc(1);
-    *ptr = c;
-    return (ptr);
-}
-
 int put_char(int i)
 {
-    write(1, &i, sizeof(int));
+    
+    write(STDOUT_FILENO, &i, sizeof(int));
     return (0);
 }
 
-void just_print(void *content)
+void just_print(char *line)
 {
-    char *str;
+    int len;
 
-    str = (char*)content;
-    if (str)
-        ft_putchar_fd(*str, STDOUT_FILENO);
+    len = 13;
+    while (*line)
+    {
+        // if (len >= tgetnum("co"))
+        // {
+        //     ft_putchar_fd('\n', STDOUT_FILENO);
+        //     len = -1;
+        // }
+        ft_putchar_fd(*line, STDOUT_FILENO);
+        line++;
+        len++;
+    }
 }
 
 void refresh(t_list *current)
 {
     char *temp;
+    
 
     if (current)
     {
         temp = (char*)current->content;
         if (temp)
         {
+            tputs(tgetstr("rc",NULL ), 1, put_char);
             write(1,"\r", 1);
-            tputs(tgetstr("ce", NULL), 1,put_char);
-            if (ft_strlen(temp) + 12 >= tgetnum("co"))
-                ft_putchar_fd('\n', STDIN_FILENO);
-            else
-                print_shell();
+            tputs(tgetstr("cd", NULL), 1,put_char);
+            print_shell();
             ft_putstr_fd(temp, STDOUT_FILENO);
         }
     }
