@@ -6,7 +6,7 @@
 /*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 01:08:02 by htagrour          #+#    #+#             */
-/*   Updated: 2021/03/31 17:54:29 by htagrour         ###   ########.fr       */
+/*   Updated: 2021/04/02 17:21:49 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 t_list *copy_list(t_list *lst)
 {
 	t_list *copy;
-
+	
+	while (lst && lst->prev)
+		lst = lst->prev;
 	copy = NULL;
 	while (lst)
 	{

@@ -6,7 +6,7 @@
 /*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 16:27:45 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/28 16:14:16 by htagrour         ###   ########.fr       */
+/*   Updated: 2021/04/02 17:10:47 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int	change_dir(t_command command, char **path, char **old_path, t_hash_map *env)
 	*old_path = getcwd(NULL, 1024);
 	if (chdir(*path) != 0)
 		return (print_error("PATH not exist or a file", 1, env));
+	free(*path);
+	*path = getcwd(NULL, 1024);
 	return (0);
 }
 

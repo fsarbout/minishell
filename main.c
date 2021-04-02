@@ -7,10 +7,8 @@ int	main (int argc, char *argv[], char **envs)
 {
 	char		*line;
 	t_hash_map	*env;
-	int			i;
 	t_list *hist;
 
-	i = 1;
     char    *term_name;
     char    *termcap;
 
@@ -21,17 +19,13 @@ int	main (int argc, char *argv[], char **envs)
 	get_external_env(envs, env);
 	ignore_signals();
 	int fd = open("test.txt", O_RDONLY);
-	while (i > 0)
+	while (get_line(&line , STDIN_FILENO, &hist))
 	{
-		print_shell();
-		i = get_line(&line , STDIN_FILENO, &hist);
-		ft_lstadd_front(&hist, ft_lstnew(ft_strdup(line)));
 		ft_putchar_fd('\n', STDOUT_FILENO);
 		if (line[0])
 			process_line(line, env);
 		free(line);
 	}
-	// ft_lstiter(hist, print);
 	ft_lstclear(&hist, free);
 	free_hash_map(env);
 	return (0);

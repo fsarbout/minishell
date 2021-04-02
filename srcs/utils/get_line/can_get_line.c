@@ -26,7 +26,7 @@ int ft_get_char(int *c, int fd)
     termios_new.c_cc[VMIN] = 1;
     termios_new.c_cc[VTIME] = 0;
     tcsetattr(STDIN_FILENO, TCSAFLUSH, &termios_new);
-    temp = malloc(sizeof(char)* 4);
+    temp = malloc(sizeof(char)* 5);
     i = read(fd, temp, 4);
     temp[i] = 0;
     *c = str_to_int(temp);
@@ -35,12 +35,12 @@ int ft_get_char(int *c, int fd)
     return (i);
 }
 
-void get_hist(t_list **temp, int flag)
+void get_hist(t_list **current, int flag)
 {
-    if (flag && *temp && (*temp)->next)
-        *temp = (*temp)->next;
-    if (!flag && *temp && (*temp)-> prev)
-        *temp = (*temp)->prev;
+    if (flag && *current && (*current)->next)
+        *current = (*current)->next;
+    if (!flag && *current && (*current)->prev)
+        *current = (*current)->prev;
 }
 
 void change_current(t_list**current, int c, int flag)
@@ -70,14 +70,30 @@ void change_current(t_list**current, int c, int flag)
     }
 }
 
+void adjust_hist(t_list **hist, char **line)
+{
+
+    if (g_var.current->content)
+        *line = ft_strdup((char*)g_var.current->content);
+    else
+        *line = ft_strdup("");
+    if (!g_var.current->prev)
+    {
+        ft_lstclear(hist, free);
+        *hist = copy_list(g_var.current);
+    }
+    else
+        ft_lstadd_front(hist, ft_lstnew(ft_strdup(*line)));
+}
 
 int get_line(char **line, int fd, t_list **hist)
 {
     int c;
     int i;
-
+    
     g_var.current = copy_list(*hist);
     ft_lstadd_front(&g_var.current, ft_lstnew(ft_strdup("")));
+    print_shell();
     while (1)
     {
         i = ft_get_char(&c, fd);
@@ -87,21 +103,20 @@ int get_line(char **line, int fd, t_list **hist)
                 break;
             if (c >= 32 && c < 127)
                 change_current(&g_var.current, c, 1);
-            if (c == CTR_D && !*(char*)g_var.current->content)
-                exit (0);
+            if (c == CTR_D && (!g_var.current || 
+                            !g_var.current->content ||
+                            !*(char*)g_var.current->content))
+                return (ft_lstclear(&g_var.current, free));
             if (c == ARROW_UP)
                 get_hist(&g_var.current, 1);
             if (c == ARROW_DOWN)
                 get_hist(&g_var.current, 0);
             if (c == DELETE)
                 change_current(&g_var.current, 0, 0);
-            refresh(g_var.current);
         }
+        refresh(g_var.current);
     }
-    if (g_var.current->content)
-        *line = ft_strdup((char*)g_var.current->content);
-    else
-        *line = ft_strdup("");
+    adjust_hist(hist, line);
     ft_lstclear(&g_var.current, free);
-    return (i);
+    return (1);
 }
