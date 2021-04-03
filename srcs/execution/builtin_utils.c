@@ -6,7 +6,7 @@
 /*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 08:56:43 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/04/03 14:33:33 by htagrour         ###   ########.fr       */
+/*   Updated: 2021/04/03 16:20:26 by fsarbout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ void	new_print(const char *str, int out_fd)
 			ft_putchar_fd('\\', out_fd);
 		ft_putchar_fd(*str, out_fd);
 		str++;
-	}
-	
+	}	
 }
+
 int	print_env(t_hash_map *env, int out_fd)
 {
 	char	*value;
