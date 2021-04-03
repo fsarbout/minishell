@@ -6,7 +6,7 @@
 /*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 08:56:43 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/19 19:20:51 by htagrour         ###   ########.fr       */
+/*   Updated: 2021/04/03 14:33:33 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,17 @@ int	add_env(char *str, t_hash_map *env)
 	return (0);
 }
 
-/*
-	check for spec char
-*/
-
+void	new_print(const char *str, int out_fd)
+{
+	while (*str)
+	{
+		if (belong("\\$\"", *str))
+			ft_putchar_fd('\\', out_fd);
+		ft_putchar_fd(*str, out_fd);
+		str++;
+	}
+	
+}
 int	print_env(t_hash_map *env, int out_fd)
 {
 	char	*value;
@@ -81,8 +88,8 @@ int	print_env(t_hash_map *env, int out_fd)
 		value = get_value(keys[i], env);
 		if (value)
 		{
-			ft_putendl_fd("=\"", out_fd, 0);
-			ft_putendl_fd(value, out_fd, 0);
+			ft_putstr_fd("=\"", out_fd);
+			new_print(value, out_fd);
 			ft_putchar_fd('\"', out_fd);
 			free(value);
 		}

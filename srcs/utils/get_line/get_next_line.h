@@ -6,7 +6,7 @@
 /*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 22:24:08 by htagrour          #+#    #+#             */
-/*   Updated: 2021/04/02 18:25:31 by htagrour         ###   ########.fr       */
+/*   Updated: 2021/04/03 14:25:00 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,6 @@ void                refresh(t_list *current);
 int                 put_char(int i);
 int					get_next_line(int fd, char **line);
 int                 get_line(char **line, int fd, t_list **hist);
+int                 str_to_int(char *str);
 
 #endif

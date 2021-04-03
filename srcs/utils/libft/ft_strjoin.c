@@ -6,7 +6,7 @@
 /*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 19:35:44 by htagrour          #+#    #+#             */
-/*   Updated: 2021/03/31 16:38:05 by htagrour         ###   ########.fr       */
+/*   Updated: 2021/04/03 14:54:49 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char 	*ft_add_char(const char *str, char c)
 	return (tab);
 }
 
-char *ft_del_char(const char *str)
+char	*ft_del_char(const char *str)
 {
 	int		len;
 	char	*tab;

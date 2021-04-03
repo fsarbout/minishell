@@ -1,25 +1,20 @@
 #include "includes/minishell.h"
-void print(void *con)
-{
-	printf("%s\n", (char*)con);
-}
-int	main (int argc, char *argv[], char **envs)
+
+int	main(int argc, char *argv[], char **envs)
 {
 	char		*line;
 	t_hash_map	*env;
-	t_list *hist;
-
-    char    *term_name;
-    char    *termcap;
+	t_list		*hist;
+	char		*term_name;
+	char		*termcap;
 
 	hist = NULL;
-    term_name = getenv("TERM");
-    tgetent(NULL, term_name);
+	term_name = getenv("TERM");
+	tgetent(NULL, term_name);
 	env = init_hash_map(30);
 	get_external_env(envs, env);
 	ignore_signals();
-	int fd = open("test.txt", O_RDONLY);
-	while (get_line(&line , STDIN_FILENO, &hist))
+	while (get_line(&line, STDIN_FILENO, &hist))
 	{
 		ft_putchar_fd('\n', STDOUT_FILENO);
 		if (line[0])

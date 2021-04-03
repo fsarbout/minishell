@@ -1,24 +1,12 @@
 #include "get_next_line.h"
 
-int str_to_int(char *str)
-{
-    int i = 0;
-
-    while(*str)
-    {
-        i += *str;
-        str++;
-    }
-    return (i);
-}
-
 int ft_get_char(int *c, int fd)
 {
     int i;
     char *temp;
     struct termios  termios_new;
     struct termios  termios_backup;
-    
+
     ft_bzero(&termios_new, sizeof(struct termios));
     tcgetattr(STDIN_FILENO, &termios_backup);
     termios_new = termios_backup;
@@ -87,6 +75,12 @@ void adjust_hist(t_list **hist, char **line)
     ft_lstclear(&g_var.current, free);
 }
 
+int clear_and_exit()
+{
+    ft_putendl_fd("exit", STDOUT_FILENO, 1);
+    exit (ft_lstclear(&g_var.current, free));
+}
+
 int get_line(char **line, int fd, t_list **hist)
 {
     int c;
@@ -94,7 +88,7 @@ int get_line(char **line, int fd, t_list **hist)
     g_var.current = copy_list(*hist);
     ft_lstadd_front(&g_var.current, ft_lstnew(ft_strdup("")));
     print_shell();
-    tputs(tgetstr("sc", NULL), 1,put_char);
+    ft_putstr_fd(tgetstr("sc", NULL), STDOUT_FILENO);
     while (1)
     {
         ft_get_char(&c, fd);
@@ -106,7 +100,7 @@ int get_line(char **line, int fd, t_list **hist)
                 change_current(&g_var.current, c);
             if (c == CTR_D && (!g_var.current || !g_var.current->content ||
                             !*(char*)g_var.current->content))
-                return (ft_lstclear(&g_var.current, free));
+                        clear_and_exit();
             if (c == ARROW_UP || c == ARROW_DOWN)
                 get_hist(&g_var.current, c == ARROW_UP);
         }

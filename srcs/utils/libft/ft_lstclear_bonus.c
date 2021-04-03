@@ -6,7 +6,7 @@
 /*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 15:52:20 by htagrour          #+#    #+#             */
-/*   Updated: 2021/04/02 16:12:09 by htagrour         ###   ########.fr       */
+/*   Updated: 2021/04/03 13:41:45 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@ int	ft_lstclear(t_list **lst, void (*del)(void*))
 	t_list	*ptr;
 	t_list	*ptr1;
 
+	while (*lst && (*lst)->prev)
+		*lst = (*lst)->prev;
+	
 	ptr = *lst;
 	if (ptr)
 	{
