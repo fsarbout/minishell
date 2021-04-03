@@ -18,8 +18,12 @@ int	main(int argc, char *argv[], char **envs)
 	char		*line;
 	t_hash_map	*env;
 	t_list		*hist;
-	char		*termcap;
 
+	hist = NULL;
+	argv = NULL;
+	(void)argc;
+	term_name = getenv("TERM");
+	tgetent(NULL, term_name);
 	hist = NULL;
 	init_termcap();
 	env = init_hash_map(30);

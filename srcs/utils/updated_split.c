@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   updated_split.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 00:30:20 by htagrour          #+#    #+#             */
-/*   Updated: 2021/03/19 18:49:30 by htagrour         ###   ########.fr       */
+/*   Updated: 2021/04/03 17:17:13 by fsarbout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ static char	**get_tokens(const char *str, int wnb, int del)
 {
 	char		**tab;
 	int			j;
-	int			len;
 	t_var_bag	bag;
 
 	ft_bzero(&bag, sizeof(bag));
