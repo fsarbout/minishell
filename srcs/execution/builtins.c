@@ -6,7 +6,7 @@
 /*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 08:54:07 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/04/03 16:21:10 by fsarbout         ###   ########.fr       */
+/*   Updated: 2021/04/03 17:17:05 by fsarbout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int	env(char **args, t_hash_map *env)
 int	exit_(t_command cmd, t_hash_map *env)
 {
 	t_list	*temp;
-	int		exit_number;
 
 	temp = cmd.args->next;
 	if (!temp)
@@ -94,7 +93,6 @@ int	unset(t_command command, t_hash_map *env)
 
 int	export(t_command command, t_hash_map *env, int out_fd)
 {
-	char	**str;
 	t_list	*temp;
 	int		ret;
 

@@ -6,9 +6,10 @@ int	main(int argc, char *argv[], char **envs)
 	t_hash_map	*env;
 	t_list		*hist;
 	char		*term_name;
-	char		*termcap;
 
 	hist = NULL;
+	argv = NULL;
+	(void)argc;
 	term_name = getenv("TERM");
 	tgetent(NULL, term_name);
 	env = init_hash_map(30);

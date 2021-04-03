@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+         #
+#    By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/22 16:29:25 by htagrour          #+#    #+#              #
-#    Updated: 2021/03/19 18:22:37 by htagrour         ###   ########.fr        #
+#    Updated: 2021/04/03 17:28:26 by fsarbout         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,13 +17,11 @@ SRC = ft_strlen.c\
 	  ft_bzero.c\
 	  ft_memcpy.c\
 	  ft_memccpy.c\
-	  ft_memmove.c\
 	  ft_memchr.c\
 	  ft_memcmp.c\
 	  ft_isalpha.c\
 	  ft_isdigit.c\
 	  ft_isalnum.c\
-	  ft_isascii.c\
 	  ft_isprint.c\
 	  ft_toupper.c\
 	  ft_tolower.c\
@@ -45,16 +43,15 @@ SRC = ft_strlen.c\
 	  ft_strdup.c\
 	  ft_split.c\
 	  ft_strtrim.c\
-	  ft_itoa.c
-
-BSRC = ft_lstsize_bonus.c\
-	   ft_lstlast_bonus.c\
-	   ft_lstadd_front_bonus.c\
-	   ft_lstadd_back_bonus.c\
-	   ft_lstdelone_bonus.c\
-	   ft_lstnew_bonus.c\
-	   ft_lstclear_bonus.c\
-	   ft_lstiter_bonus.c\
+	  ft_itoa.c\
+	  ft_lstsize_bonus.c\
+	  ft_lstlast_bonus.c\
+	  ft_lstadd_front_bonus.c\
+	  ft_lstadd_back_bonus.c\
+	  ft_lstdelone_bonus.c\
+	  ft_lstnew_bonus.c\
+	  ft_lstclear_bonus.c\
+	  ft_lstiter_bonus.c
 
 
 OBJECT = ft_strlen.o\
@@ -62,13 +59,11 @@ OBJECT = ft_strlen.o\
 		 ft_bzero.o\
 		 ft_memcpy.o\
 		 ft_memccpy.o\
-		 ft_memmove.o\
 		 ft_memchr.o\
 		 ft_memcmp.o\
 		 ft_isalpha.o\
 		 ft_isdigit.o\
 		 ft_isalnum.o\
-		 ft_isascii.o\
 		 ft_isprint.o\
 		 ft_toupper.o\
 		 ft_tolower.o\
@@ -90,16 +85,15 @@ OBJECT = ft_strlen.o\
 		 ft_strdup.o\
 		 ft_split.o\
 		 ft_strtrim.o\
-		 ft_itoa.o
-
-BOBJET = ft_lstadd_back_bonus.o\
+		 ft_itoa.o\
+		 ft_lstadd_back_bonus.o\
 		 ft_lstdelone_bonus.o\
 		 ft_lstnew_bonus.o\
 		 ft_lstadd_front_bonus.o\
 		 ft_lstlast_bonus.o\
 		 ft_lstsize_bonus.o\
 		 ft_lstclear_bonus.o\
-		 ft_lstiter_bonus.o\
+		 ft_lstiter_bonus.o
 
 INCLUDES=./
 
@@ -111,12 +105,8 @@ $(NAME): $(OBJECT)
 	@ranlib $(NAME)
 
 clean:
-	@rm -f $(OBJECT) $(BOBJET)
-bonus:
-	@gcc -Wall -Wextra -Werror -I$(INCLUDES) -c $(BSRC)
-	@ar rc $(NAME) $(BOBJET)
-	@ranlib $(NAME)
+	@rm -f $(OBJECT)
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 08:56:43 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/04/03 16:20:26 by fsarbout         ###   ########.fr       */
+/*   Updated: 2021/04/03 17:16:33 by fsarbout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int	add_env(char *str, t_hash_map *env)
 	char	*key;
 	int		i;
 	int		index;
-	char	*value;
 
 	i = 0;
 	index = ft_strchr_eql(str, '=');

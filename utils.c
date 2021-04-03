@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 11:59:17 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/04/02 19:31:10 by htagrour         ###   ########.fr       */
+/*   Updated: 2021/04/03 17:18:35 by fsarbout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	sig_handler(int sig)
 {
-	char	*temp;
-
 	if (g_var.flag)
 	{
 		if (sig != SIGINT)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 00:30:20 by htagrour          #+#    #+#             */
-/*   Updated: 2021/03/19 19:09:36 by htagrour         ###   ########.fr       */
+/*   Updated: 2021/04/03 17:13:34 by fsarbout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,6 @@ static int	words_number(char const *str, char c)
 		i++;
 	}
 	return (words_number);
-}
-
-static void	delet_all(char **tab, int j)
-{
-	while (j >= 0)
-	{
-		free(tab[j]);
-		j--;
-	}
-	free(tab);
 }
 
 static void	add_letters(int len, int pos, char const *str, char *tab)
