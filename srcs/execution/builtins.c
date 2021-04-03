@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 08:54:07 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/31 18:56:11 by htagrour         ###   ########.fr       */
+/*   Updated: 2021/04/03 16:21:10 by fsarbout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ int	exit_(t_command cmd, t_hash_map *env)
 	t_list	*temp;
 	int		exit_number;
 
-	if (!cmd.next)
-	ft_putendl_fd("exit", STDOUT_FILENO, 1);
 	temp = cmd.args->next;
 	if (!temp)
 		exit(ft_atoi(get_value("?", env)));
@@ -46,6 +44,8 @@ int	exit_(t_command cmd, t_hash_map *env)
 		exit(print_error("exit: numeric argument required", 255, env));
 	if (temp->next)
 		return (print_error("exit: too many arguments", 1, env));
+	if (!cmd.next)
+		ft_putendl_fd("exit", STDOUT_FILENO, 1);
 	exit(ft_atoi((char*)temp->content));
 	return (0);
 }

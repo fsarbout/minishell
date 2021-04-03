@@ -6,7 +6,7 @@
 /*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/19 18:40:20 by htagrour          #+#    #+#             */
-/*   Updated: 2021/03/30 17:53:27 by htagrour         ###   ########.fr       */
+/*   Updated: 2021/04/03 15:29:46 by fsarbout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	ft_lstdelone(t_list **lst, void (*del)(void*))
 {	
-	t_list *temp;
-	
+	t_list	*temp;
+
 	if (*lst && del)
 	{
 		temp = (*lst)->next;

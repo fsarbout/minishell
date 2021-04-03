@@ -6,7 +6,7 @@
 /*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/19 09:28:41 by htagrour          #+#    #+#             */
-/*   Updated: 2021/03/29 16:11:40 by htagrour         ###   ########.fr       */
+/*   Updated: 2021/04/03 15:40:20 by fsarbout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_lstadd_back(t_list **list, t_list *new)
 {
-	t_list *last_one;
+	t_list	*last_one;
 
 	if (*list)
 	{

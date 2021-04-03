@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_func.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 16:27:45 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/04/02 17:10:47 by htagrour         ###   ########.fr       */
+/*   Updated: 2021/04/03 15:55:13 by fsarbout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ int	change_dir(t_command command, char **path, char **old_path, t_hash_map *env)
 		else
 		{
 			if (temp[0] == '~')
-				*path = ft_strjoin("/Users/htagrour", temp + 1);
+				*path = ft_strjoin("/Users/fsarbout", temp + 1);
 			else
 				*path = ft_strdup(temp);
 		}
 	}
 	else
-		*path = ft_strdup("/Users/htagrour");
+		*path = ft_strdup("/Users/fsarbout");
 	*old_path = getcwd(NULL, 1024);
 	if (chdir(*path) != 0)
 		return (print_error("PATH not exist or a file", 1, env));

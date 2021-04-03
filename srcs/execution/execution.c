@@ -6,7 +6,7 @@
 /*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 09:06:05 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/04/01 18:11:04 by htagrour         ###   ########.fr       */
+/*   Updated: 2021/04/03 16:22:26 by fsarbout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	execute_commands(t_command *commands, int last_fd, int total
 	int	ret;
 	int	pid;
 
-	if ((total == 1) && commands->args &&  built_in1(*commands, env, 1) != -1)
+	if ((total == 1) && commands->args && built_in1(*commands, env, 1) != -1)
 		return (0);
 	pipe(fds);
 	pid = start_process(*commands, last_fd, fds, env);
