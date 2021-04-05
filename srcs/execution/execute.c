@@ -6,11 +6,11 @@
 /*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 16:27:58 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/04/03 16:21:42 by fsarbout         ###   ########.fr       */
+/*   Updated: 2021/04/05 15:59:25 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../minishell.h"
 
 char	*get_bin(char *cmd, struct stat st, t_hash_map *env, int i)
 {

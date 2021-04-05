@@ -1,6 +1,6 @@
-#include "includes/minishell.h"
+#include "minishell.h"
 
-void	init_termcap(void)
+char	*get_term(void)
 {
 	char		*term_name;
 
@@ -10,7 +10,7 @@ void	init_termcap(void)
 		ft_putendl_fd("TERM environment variable not set", STDOUT_FILENO, 1);
 		exit(1);
 	}
-	tgetent(NULL, term_name);
+	return (term_name);
 }
 
 int	main(int argc, char *argv[], char **envs)
@@ -22,10 +22,8 @@ int	main(int argc, char *argv[], char **envs)
 	hist = NULL;
 	argv = NULL;
 	(void)argc;
-	term_name = getenv("TERM");
-	tgetent(NULL, term_name);
 	hist = NULL;
-	init_termcap();
+	tgetent(NULL, get_term());
 	env = init_hash_map(30);
 	get_external_env(envs, env);
 	ignore_signals();

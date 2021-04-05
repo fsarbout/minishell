@@ -6,11 +6,11 @@
 /*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 16:28:42 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/19 17:32:06 by htagrour         ###   ########.fr       */
+/*   Updated: 2021/04/05 15:59:51 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../minishell.h"
 
 void	adjust_var_bag(t_var_bag *bag, char c)
 {

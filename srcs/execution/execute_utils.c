@@ -6,11 +6,11 @@
 /*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 09:08:28 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/19 18:13:19 by htagrour         ###   ########.fr       */
+/*   Updated: 2021/04/05 15:59:22 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../minishell.h"
 
 int	is_buitin1(char *str)
 {

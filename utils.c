@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
+/*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 11:59:17 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/04/03 17:18:35 by fsarbout         ###   ########.fr       */
+/*   Updated: 2021/04/05 16:13:34 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minishell.h"
+#include "minishell.h"
 
 void	sig_handler(int sig)
 {
@@ -26,6 +26,7 @@ void	sig_handler(int sig)
 		g_var.current->content = ft_strdup("");
 		ft_putchar_fd('\n', STDOUT_FILENO);
 		print_shell();
+		ft_putstr_fd(tgetstr("sc", NULL), STDOUT_FILENO);
 	}
 }
 

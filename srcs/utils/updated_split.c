@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   updated_split.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
+/*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 00:30:20 by htagrour          #+#    #+#             */
-/*   Updated: 2021/04/03 17:17:13 by fsarbout         ###   ########.fr       */
+/*   Updated: 2021/04/05 16:01:03 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../minishell.h"
 
 int	check_condition(char c, t_var_bag *bag, int *wn, int *del_flag)
 {

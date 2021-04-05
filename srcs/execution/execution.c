@@ -6,11 +6,11 @@
 /*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 09:06:05 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/04/03 16:22:26 by fsarbout         ###   ########.fr       */
+/*   Updated: 2021/04/05 15:59:28 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../minishell.h"
 
 void	sig_default_mode(void)
 {

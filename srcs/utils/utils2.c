@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
+/*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 09:45:29 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/18 09:56:49 by fsarbout         ###   ########.fr       */
+/*   Updated: 2021/04/05 16:01:13 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+
+#include "../../minishell.h"
 
 void	free_struct_file(void *red)
 {

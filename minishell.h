@@ -6,16 +6,16 @@
 /*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 11:27:20 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/04/03 14:45:27 by htagrour         ###   ########.fr       */
+/*   Updated: 2021/04/05 16:10:30 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "../srcs/utils/get_line/get_next_line.h"
-# include "../srcs/utils/libft/libft.h"
-# include "../srcs/utils/hash_table/hash_table.h"
+# include "srcs/utils/get_line/get_next_line.h"
+# include "srcs/utils/libft/libft.h"
+# include "srcs/utils/hash_table/hash_table.h"
 # include <stdio.h>
 # include <fcntl.h>
 # include <string.h>

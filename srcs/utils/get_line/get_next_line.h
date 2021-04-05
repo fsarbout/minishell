@@ -6,7 +6,7 @@
 /*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 22:24:08 by htagrour          #+#    #+#             */
-/*   Updated: 2021/04/03 15:19:04 by fsarbout         ###   ########.fr       */
+/*   Updated: 2021/04/05 16:00:27 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <stdlib.h>
 # include <termios.h>
 # include <termcap.h>
-# include "../../../includes/minishell.h"
+# include "../../../minishell.h"
 # include "../libft/libft.h"
 # define BUFFER_SIZE 1
 # define CTR_D 4

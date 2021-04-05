@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fsarbout <fsarbout@student.42.fr>          +#+  +:+       +#+        */
+/*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 08:54:07 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/04/03 17:17:05 by fsarbout         ###   ########.fr       */
+/*   Updated: 2021/04/05 15:59:18 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../minishell.h"
 
 int	env(char **args, t_hash_map *env)
 {
@@ -38,7 +38,10 @@ int	exit_(t_command cmd, t_hash_map *env)
 
 	temp = cmd.args->next;
 	if (!temp)
+	{
+		ft_putendl_fd("exit", STDOUT_FILENO, 1);
 		exit(ft_atoi(get_value("?", env)));
+	}
 	if (!is_valide_exit((char *)temp->content))
 		exit(print_error("exit: numeric argument required", 255, env));
 	if (temp->next)

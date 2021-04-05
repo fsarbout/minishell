@@ -6,11 +6,11 @@
 /*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 16:28:32 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/04/03 16:23:23 by fsarbout         ###   ########.fr       */
+/*   Updated: 2021/04/05 15:59:46 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../minishell.h"
 
 int	get_argument(char **str, char **ptr, t_var_bag *bag, t_hash_map *env)
 {

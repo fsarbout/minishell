@@ -6,12 +6,12 @@
 /*   By: htagrour <htagrour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 10:32:50 by fsarbout          #+#    #+#             */
-/*   Updated: 2021/03/19 18:58:59 by htagrour         ###   ########.fr       */
+/*   Updated: 2021/04/05 16:10:43 by htagrour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "hash_table.h"
-#include "../../../includes/minishell.h"
+#include "../../../minishell.h"
 
 t_listo	*new_item(const char *key, const char *value)
 {
